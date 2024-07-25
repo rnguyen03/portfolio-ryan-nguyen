@@ -4,19 +4,13 @@ import { allProjects } from "contentlayer/generated";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Article } from "./article";
-import { Redis } from "@upstash/redis";
 import { Eye } from "lucide-react";
 
-const redis = Redis.fromEnv();
-
-export const revalidate = 60;
-export default async function ProjectsPage() {
-  const views = (
-    await redis.mget<number[]>(
-      ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
-    )
-  ).reduce((acc, v, i) => {
-    acc[allProjects[i].slug] = v ?? 0;
+// export const revalidate = 60; // Uncomment this if you are using ISR
+export default function ProjectsPage() {
+  // Removing the Redis functionality and using default values for views
+  const views = allProjects.reduce((acc, project) => {
+    acc[project.slug] = 0; // Setting default views to 0 or any static value
     return acc;
   }, {} as Record<string, number>);
 
