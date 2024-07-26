@@ -3,6 +3,7 @@ import { Inter } from "@next/font/google";
 import LocalFont from "@next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: {
@@ -69,20 +70,24 @@ const calSans = LocalFont({
   variable: "--font-calsans",
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
-      <head>
+      <Head>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
+            `,
+          }}
+        />
         <Analytics />
-      </head>
-      <body
-        className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-          }`}
-      >
+      </Head>
+      <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
         {children}
       </body>
     </html>
