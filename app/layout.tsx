@@ -6,21 +6,21 @@ import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "Ryan Nguyen's Portfolio",
+    default: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
     template: "%s | Ryan Nguyen's Portfolio",
   },
-  description: "Aspiring AI Engineer and Full Stack Developer",
+  description: "Explore the portfolio of Ryan Nguyen, an aspiring AI Engineer and Full Stack Developer. Discover projects, skills, and experiences in AI, machine learning, and web development.",
   openGraph: {
-    title: "Ryan Nguyen's Portfolio",
-    description:
-      "Aspiring AI Engineer and Full Stack Developer",
+    title: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
+    description: "Explore the portfolio of Ryan Nguyen, an aspiring AI Engineer and Full Stack Developer. Discover projects, skills, and experiences in AI, machine learning, and web development.",
     url: "https://portfolio-ryan-nguyen.vercel.app/",
     siteName: "Ryan Nguyen's Portfolio",
     images: [
       {
-        url: "",
+        url: "https://portfolio-ryan-nguyen.vercel.app/og-image.png", // Ensure you have an image at this path
         width: 1920,
         height: 1080,
+        alt: "Ryan Nguyen's Portfolio",
       },
     ],
     locale: "en-US",
@@ -38,13 +38,27 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Ryan Nguyen's Portfolio",
+    title: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
     card: "summary_large_image",
+    images: {
+      url: "https://portfolio-ryan-nguyen.vercel.app/og.png", // Ensure you have an image at this path
+      alt: "Ryan Nguyen's Portfolio",
+    },
   },
   icons: {
     shortcut: "/favicon.png",
   },
+  keywords: [
+    "Ryan Nguyen",
+    "AI Engineer",
+    "Full Stack Developer",
+    "Machine Learning",
+    "Web Development",
+    "Portfolio",
+    "Software Engineer",
+  ],
 };
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
