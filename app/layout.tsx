@@ -71,8 +71,10 @@ const calSans = LocalFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
-      <Head>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}></script>
+      <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
+        {children}
+      </body>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -83,10 +85,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-      </Head>
-      <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
-        {children}
-      </body>
     </html>
   );
 }
