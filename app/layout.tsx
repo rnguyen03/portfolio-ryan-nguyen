@@ -6,19 +6,19 @@ import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "chronark.com",
-    template: "%s | chronark.com",
+    default: "Ryan Nguyen's Portfolio",
+    template: "%s | Ryan Nguyen's Portfolio",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "Aspiring AI Engineer and Full Stack Developer",
   openGraph: {
-    title: "chronark.com",
+    title: "Ryan Nguyen's Portfolio",
     description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
-    url: "https://chronark.com",
-    siteName: "chronark.com",
+      "Aspiring AI Engineer and Full Stack Developer",
+    url: "w",
+    siteName: "Ryan Nguyen's Portfolio",
     images: [
       {
-        url: "https://chronark.com/og.png",
+        url: "",
         width: 1920,
         height: 1080,
       },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Chronark",
+    title: "Ryan Nguyen's Portfolio",
     card: "summary_large_image",
   },
   icons: {
