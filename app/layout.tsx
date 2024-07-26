@@ -71,20 +71,20 @@ const calSans = LocalFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
-      <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
-        {children}
-      </body>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}></script>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=G-Q8VE7VEYQR`}></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
+              gtag('config', 'G-Q8VE7VEYQR');
             `,
           }}
         />
+      <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
+        {children}
+      </body>
     </html>
   );
 }
