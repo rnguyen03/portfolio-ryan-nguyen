@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Ryan Nguyen's Portfolio",
     description:
       "Aspiring AI Engineer and Full Stack Developer",
-    url: "w",
+    url: "https://portfolio-ryan-nguyen.vercel.app/",
     siteName: "Ryan Nguyen's Portfolio",
     images: [
       {
