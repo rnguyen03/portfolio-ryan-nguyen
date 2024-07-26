@@ -6,16 +6,16 @@ import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "ryannguyen.dev",
-    template: "%s | ryannguyen.dev",
+    default: "Ryan Nguyen's Portfolio",
+    template: "%s | Ryan Nguyen's Portfolio",
   },
   description: "Aspiring AI Engineer and Full Stack Developer",
   openGraph: {
-    title: "ryannguyen.dev",
+    title: "Ryan Nguyen's Portfolio",
     description:
       "Aspiring AI Engineer and Full Stack Developer",
     url: "w",
-    siteName: "ryannguyen.dev",
+    siteName: "Ryan Nguyen's Portfolio",
     images: [
       {
         url: "",
