@@ -14,9 +14,9 @@ export default function ProjectsPage() {
     return acc;
   }, {} as Record<string, number>);
 
-  const featured = allProjects.find((project) => project.slug === "unkey")!;
-  const top2 = allProjects.find((project) => project.slug === "planetfall")!;
-  const top3 = allProjects.find((project) => project.slug === "highstorm")!;
+  const featured = allProjects.find((project) => project.slug === "hotdaddy")!;
+  const top2 = allProjects.find((project) => project.slug === "2fold")!;
+  const top3 = allProjects.find((project) => project.slug === "stockzia")!;
   const sorted = allProjects
     .filter((p) => p.published)
     .filter(
@@ -40,7 +40,7 @@ export default function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 text-zinc-400">
-            Some of the projects are from work and some are on my own time.
+          My innovative endeavors and collaborative efforts towards shaping tomorrow.
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />
