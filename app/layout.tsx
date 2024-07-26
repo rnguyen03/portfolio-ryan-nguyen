@@ -71,6 +71,8 @@ const calSans = LocalFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+      <head>
+      </head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=G-Q8VE7VEYQR`}></script>
         <script
           dangerouslySetInnerHTML={{
