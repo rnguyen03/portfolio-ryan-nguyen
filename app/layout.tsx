@@ -1,11 +1,9 @@
 import "../global.css";
 import { Inter } from "@next/font/google";
 import LocalFont from "@next/font/local";
-import { Metadata } from "next";
-import { Analytics } from "./components/analytics";
 import Head from "next/head";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: {
     default: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
     template: "%s | Ryan Nguyen's Portfolio",
@@ -18,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "Ryan Nguyen's Portfolio",
     images: [
       {
-        url: "https://portfolio-ryan-nguyen.vercel.app/og-image.png", // Ensure you have an image at this path
+        url: "https://portfolio-ryan-nguyen.vercel.app/og-image.png",
         width: 1920,
         height: 1080,
         alt: "Ryan Nguyen's Portfolio",
@@ -42,7 +40,7 @@ export const metadata: Metadata = {
     title: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
     card: "summary_large_image",
     images: {
-      url: "https://portfolio-ryan-nguyen.vercel.app/og.png", // Ensure you have an image at this path
+      url: "https://portfolio-ryan-nguyen.vercel.app/og.png",
       alt: "Ryan Nguyen's Portfolio",
     },
   },
@@ -85,7 +83,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        <Analytics />
       </Head>
       <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
         {children}
