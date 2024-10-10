@@ -7,6 +7,9 @@ module.exports = {
 		"./mdx-components.tsx",
 		"content/**/*.mdx",
 	],
+	experimental: {
+		metadataBase: 'https://portfolio-ryan-nguyen.vercel.app/',
+	},
 
 	theme: {
 		extend: {
