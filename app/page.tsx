@@ -15,15 +15,25 @@ const navigation = [
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+  const [skipHeroAnimation, setSkipHeroAnimation] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    // Show scroll indicator after landing animation completes (3 seconds)
-    const timer = setTimeout(() => {
-      setShowScrollIndicator(true);
-    }, 3000);
     
-    return () => clearTimeout(timer);
+    // Check if user is returning from a project page (has hash in URL)
+    const hasHash = window.location.hash;
+    if (hasHash) {
+      // Skip animation and show scroll indicator immediately
+      setSkipHeroAnimation(true);
+      setShowScrollIndicator(true);
+    } else {
+      // First visit - show scroll indicator after landing animation completes (3 seconds)
+      const timer = setTimeout(() => {
+        setShowScrollIndicator(true);
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   // Get projects data
@@ -53,7 +63,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-tl from-black via-zinc-600/20 to-black">
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden relative px-4">
-        <nav className="my-8 md:my-16 animate-fade-in">
+        <nav className={`my-8 md:my-16 ${skipHeroAnimation ? '' : 'animate-fade-in'}`}>
           <ul className="flex items-center justify-center gap-6 md:gap-4">
             {navigation.map((item) => (
               <a
@@ -107,7 +117,9 @@ export default function Home() {
             ))}
           </ul>
         </nav>
-        <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+        {!skipHeroAnimation && (
+          <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+        )}
 
         {/* Render Particles only when the component is mounted */}
         {isMounted && (
@@ -117,12 +129,14 @@ export default function Home() {
           />
         )}
 
-        <h1 className="py-3.5 px-0.5 z-10 text-5xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text text-center">
+        <h1 className={`py-3.5 px-0.5 z-10 text-5xl text-transparent duration-1000 bg-white cursor-default text-edge-outline font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text text-center ${skipHeroAnimation ? '' : 'animate-title'}`}>
           Ryan Nguyen
         </h1>
 
-        <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-        <div className="my-8 md:my-16 text-center animate-fade-in px-4">
+        {!skipHeroAnimation && (
+          <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+        )}
+        <div className={`my-8 md:my-16 text-center px-4 ${skipHeroAnimation ? '' : 'animate-fade-in'}`}>
           <h2 className="text-xl md:text-lg text-zinc-300 mb-4 font-medium">
             Aspiring AI Engineer & Full Stack Developer
           </h2>
@@ -141,7 +155,7 @@ export default function Home() {
 
 
       {/* Projects Section */}
-      <div id="projects" className="relative pb-16 animate-fade-in">
+      <div id="projects" className={`relative pb-16 ${skipHeroAnimation ? '' : 'animate-fade-in'}`}>
         <div className="px-4 pt-12 mx-auto space-y-6 max-w-7xl sm:px-6 md:space-y-8 md:pt-20 lg:px-8 md:space-y-16 lg:pt-32">
           <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
             <h2 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl md:text-3xl lg:text-4xl">
