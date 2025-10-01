@@ -6,21 +6,21 @@ import Head from "next/head";
 export const metadata = {
   metadataBase: new URL('https://portfolio-ryan-nguyen.vercel.app'),
   title: {
-    default: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
-    template: "%s | Ryan Nguyen's Portfolio",
+    default: "Ryan Nguyen - Software Engineer | AI & Full Stack Development",
+    template: "%s | Ryan Nguyen",
   },
-  description: "Explore the portfolio of Ryan Nguyen, an aspiring AI Engineer and Full Stack Developer. Discover projects, skills, and experiences in AI, machine learning, and web development.",
+  description: "Software Engineering student specializing in machine learning and full-stack development. View projects in AI systems, web applications, and software engineering.",
   openGraph: {
-    title: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
-    description: "Explore the portfolio of Ryan Nguyen, an aspiring AI Engineer and Full Stack Developer. Discover projects, skills, and experiences in AI, machine learning, and web development.",
+    title: "Ryan Nguyen - Software Engineer | AI & Full Stack Development",
+    description: "Software Engineering student specializing in machine learning and full-stack development. View projects in AI systems, web applications, and software engineering.",
     url: "https://portfolio-ryan-nguyen.vercel.app/",
-    siteName: "Ryan Nguyen's Portfolio",
+    siteName: "Ryan Nguyen - Software Engineer Portfolio",
     images: [
       {
         url: "https://portfolio-ryan-nguyen.vercel.app/og-image.png",
-        width: 1920,
-        height: 1080,
-        alt: "Ryan Nguyen's Portfolio",
+        width: 1200,
+        height: 630,
+        alt: "Ryan Nguyen - Software Engineer Portfolio",
       },
     ],
     locale: "en-US",
@@ -38,11 +38,11 @@ export const metadata = {
     },
   },
   twitter: {
-    title: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
+    title: "Ryan Nguyen - Software Engineer | AI & Full Stack Development",
     card: "summary_large_image",
     images: {
       url: "https://portfolio-ryan-nguyen.vercel.app/og.png",
-      alt: "Ryan Nguyen's Portfolio",
+      alt: "Ryan Nguyen - Software Engineer Portfolio",
     },
   },
   icons: {
@@ -50,13 +50,26 @@ export const metadata = {
   },
   keywords: [
     "Ryan Nguyen",
-    "AI Engineer",
-    "Full Stack Developer",
-    "Machine Learning",
-    "Web Development",
-    "Portfolio",
     "Software Engineer",
+    "Machine Learning Engineer",
+    "Full Stack Developer",
+    "AI Engineer",
+    "Computer Science Student",
+    "Deep Learning",
+    "Python Developer",
+    "React Developer",
+    "Machine Learning Projects",
+    "Web Development Portfolio",
+    "Software Engineering Portfolio",
+    "AI Projects",
+    "Mobile Developer",
   ],
+  authors: [{ name: "Ryan Nguyen" }],
+  creator: "Ryan Nguyen",
+  publisher: "Ryan Nguyen",
+  alternates: {
+    canonical: "https://portfolio-ryan-nguyen.vercel.app",
+  },
 };
 
 const inter = Inter({
