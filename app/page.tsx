@@ -62,12 +62,30 @@ export default function Home() {
                     });
                     // Add highlight effect to contact icons
                     setTimeout(() => {
-                      const contactIcons = document.querySelectorAll('footer a');
-                      contactIcons.forEach(icon => {
-                        icon.classList.add('animate-pulse');
+                      const contactIcons = document.querySelectorAll('footer a') as NodeListOf<HTMLElement>;
+                      contactIcons.forEach((icon, index) => {
+                        // Add a more noticeable highlight effect with staggered timing
                         setTimeout(() => {
-                          icon.classList.remove('animate-pulse');
-                        }, 2000);
+                          icon.style.transform = 'scale(1.3)';
+                          icon.style.color = '#ffffff';
+                          icon.style.filter = 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))';
+                          icon.style.transition = 'all 0.3s ease';
+                          
+                          // Add a subtle bounce effect
+                          setTimeout(() => {
+                            icon.style.transform = 'scale(1.1)';
+                            setTimeout(() => {
+                              icon.style.transform = 'scale(1.3)';
+                            }, 150);
+                          }, 200);
+                          
+                          // Remove the effect after 2.5 seconds
+                          setTimeout(() => {
+                            icon.style.transform = 'scale(1)';
+                            icon.style.color = '';
+                            icon.style.filter = '';
+                          }, 2500);
+                        }, index * 200); // Stagger each icon by 200ms
                       });
                     }, 500);
                   } else {
