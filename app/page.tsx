@@ -14,9 +14,16 @@ const navigation = [
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+    // Show scroll indicator after landing animation completes (3 seconds)
+    const timer = setTimeout(() => {
+      setShowScrollIndicator(true);
+    }, 3000);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   // Get projects data
@@ -125,7 +132,7 @@ export default function Home() {
         </div>
         
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 ${showScrollIndicator ? 'opacity-100 animate-bounce' : 'opacity-0'}`}>
           <div className="w-6 h-10 border-2 border-zinc-400 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-zinc-400 rounded-full mt-2 animate-pulse"></div>
           </div>
