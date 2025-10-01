@@ -138,10 +138,10 @@ export default function Home() {
         )}
         <div className={`my-8 md:my-16 text-center px-4 ${skipHeroAnimation ? '' : 'animate-fade-in'}`}>
           <h2 className="text-xl md:text-lg text-zinc-300 mb-4 font-medium">
-            Aspiring AI Engineer & Full Stack Developer
+            Software Engineer | AI & Full Stack Development
           </h2>
           <p className="text-base md:text-sm text-zinc-500 max-w-2xl mx-auto leading-relaxed">
-            Passionate about transforming ideas into impactful applications through innovative AI solutions and robust web development.
+            Transforming ideas into impactful applications through AI solutions and web development.
           </p>
         </div>
         
@@ -161,9 +161,6 @@ export default function Home() {
             <h2 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl md:text-3xl lg:text-4xl">
               Projects
             </h2>
-            <p className="mt-4 text-base md:text-sm text-zinc-400 leading-relaxed">
-              A showcase of my innovative projects and collaborative efforts in AI, web development, and software engineering.
-            </p>
           </div>
           <div className="w-full h-px bg-zinc-800" />
 
