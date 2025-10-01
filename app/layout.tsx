@@ -4,6 +4,7 @@ import LocalFont from "next/font/local";
 import Head from "next/head";
 
 export const metadata = {
+  metadataBase: new URL('https://portfolio-ryan-nguyen.vercel.app'),
   title: {
     default: "Ryan Nguyen's Portfolio - Aspiring AI Engineer and Full Stack Developer",
     template: "%s | Ryan Nguyen's Portfolio",
@@ -72,7 +73,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
       <head>
-      </head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=G-Q8VE7VEYQR`}></script>
         <script
           dangerouslySetInnerHTML={{
@@ -84,6 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+      </head>
       <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
         {children}
       </body>
