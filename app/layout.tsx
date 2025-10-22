@@ -80,6 +80,7 @@ const inter = Inter({
 const calSans = LocalFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
+  display: "swap", // Add display swap for better loading
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -18,6 +18,19 @@ export default function Particles({
 	ease = 50,
 	refresh = false,
 }: ParticlesProps) {
+	// Adjustable parameters
+	const PARTICLE_SIZE = 1.5;
+	const PARTICLE_MIN_ALPHA = 0.1;
+	const PARTICLE_MAX_ALPHA = 0.7;
+	const PARTICLE_SPEED_FACTOR = 0.3;
+	const PARTICLE_MAGNETISM_MIN = 0.1;
+	const PARTICLE_MAGNETISM_MAX = 7.1;
+	const ALPHA_INCREMENT = 0.02;
+	const EDGE_REMAP_START = 0;
+	const EDGE_REMAP_END = 20;
+	const EDGE_REMAP_TARGET_START = 0;
+	const EDGE_REMAP_TARGET_END = 1;
+
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const canvasContainerRef = useRef<HTMLDivElement>(null);
 	const context = useRef<CanvasRenderingContext2D | null>(null);
@@ -98,12 +111,12 @@ export default function Particles({
 		const y = Math.floor(Math.random() * canvasSize.current.h);
 		const translateX = 0;
 		const translateY = 0;
-		const size = Math.floor(Math.random() * 2) + 0.1;
+		const size = Math.floor(Math.random() * 2) + PARTICLE_SIZE;
 		const alpha = 0;
-		const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
-		const dx = (Math.random() - 0.5) * 0.2;
-		const dy = (Math.random() - 0.5) * 0.2;
-		const magnetism = 0.1 + Math.random() * 4;
+		const targetAlpha = parseFloat((Math.random() * (PARTICLE_MAX_ALPHA - PARTICLE_MIN_ALPHA) + PARTICLE_MIN_ALPHA).toFixed(1));
+		const dx = (Math.random() - 0.5) * PARTICLE_SPEED_FACTOR;
+		const dy = (Math.random() - 0.5) * PARTICLE_SPEED_FACTOR;
+		const magnetism = PARTICLE_MAGNETISM_MIN + Math.random() * (PARTICLE_MAGNETISM_MAX - PARTICLE_MAGNETISM_MIN);
 		return {
 			x,
 			y,
@@ -178,10 +191,10 @@ export default function Particles({
 			];
 			const closestEdge = edge.reduce((a, b) => Math.min(a, b));
 			const remapClosestEdge = parseFloat(
-				remapValue(closestEdge, 0, 20, 0, 1).toFixed(2),
+				remapValue(closestEdge, EDGE_REMAP_START, EDGE_REMAP_END, EDGE_REMAP_TARGET_START, EDGE_REMAP_TARGET_END).toFixed(2),
 			);
 			if (remapClosestEdge > 1) {
-				circle.alpha += 0.02;
+				circle.alpha += ALPHA_INCREMENT;
 				if (circle.alpha > circle.targetAlpha) {
 					circle.alpha = circle.targetAlpha;
 				}
