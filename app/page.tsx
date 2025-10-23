@@ -200,7 +200,7 @@ export default function Home() {
                   <p className="mt-4 text-base md:text-sm leading-6 md:leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
                     {featured.description}
                   </p>
-                  <div className="absolute bottom-4 md:bottom-8">
+                  <div className="absolute bottom-8">
                     <p className="text-zinc-200 hover:text-zinc-50 text-sm md:text-base">
                       Read more <span aria-hidden="true">&rarr;</span>
                     </p>
