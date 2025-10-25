@@ -5,6 +5,7 @@ import {
 	useSpring,
 	useTransform,
 	useMotionValue,
+	animate,
 } from "framer-motion";
 
 import { PropsWithChildren, useMemo, useRef, useState } from "react";
@@ -13,7 +14,8 @@ import { PropsWithChildren, useMemo, useRef, useState } from "react";
 export const Card: React.FC<PropsWithChildren> = ({ children }) => {
 	const ref = useRef<HTMLDivElement>(null);
 	const [hovered, setHovered] = useState(false);
-	const DEBUG_RING = true; // toggle to false to disable the visible debug edge
+	const DEBUG_RING = false; // toggle to false to disable the visible debug edge
+	const recenterTimeout = useRef<number | null>(null);
 
 		// Immediate tracking values + smoothed springs for tilt
 		const mxRaw = useMotionValue(0.5);
@@ -59,11 +61,21 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
 
 	function onEnter() {
 		setHovered(true);
+		// if a delayed recenter was scheduled, cancel it
+		if (recenterTimeout.current) {
+			clearTimeout(recenterTimeout.current);
+			recenterTimeout.current = null;
+		}
 	}
 	function onLeave() {
 		setHovered(false);
-			mxRaw.set(0.5);
-			myRaw.set(0.5);
+			// Let the shadow/spotlight fade out in place, then recenter after fade completes
+			if (recenterTimeout.current) clearTimeout(recenterTimeout.current);
+			recenterTimeout.current = window.setTimeout(() => {
+				animate(mxRaw, 0.5, { duration: 0.35, ease: [0.22, 1, 0.36, 1] });
+				animate(myRaw, 0.5, { duration: 0.35, ease: [0.22, 1, 0.36, 1] });
+				recenterTimeout.current = null;
+			}, 700); // wait longer than the shadow fade (0.65s)
 	}
 
 	return (
@@ -85,32 +97,46 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
 			animate={{
 				y: hovered ? -3 : 0,
 				boxShadow: hovered
-					? "0 2px 2px rgba(0,0,0,.06), 0 18px 36px rgba(0,0,0,.16)"
+					? "0 2px 2px rgba(0,0,0,.06), 0 18px 36px rgba(0, 0, 0, 0.4)"
 					: "0 1px 0 rgba(0,0,0,.05), 0 12px 24px rgba(0,0,0,.08)",
 			}}
-			transition={{ type: "spring", stiffness: 260, damping: 28 }}
+			transition={{ 
+				type: "spring", 
+				stiffness: 260, 
+				damping: 28,
+				boxShadow: { duration: 0.55, ease: "easeInOut" },
+				y: { type: "spring", stiffness: 260, damping: 28 }
+			}}
 		>
-			{/* Soft base overlay for readability */}
-			<div className="absolute inset-0 z-0 bg-gradient-to-b from-white/90 to-cream-50/92" />
-
-			{/* Hover darkening layer (sits under spotlight/tint to make lamp feel bright) */}
-			<motion.div
-				aria-hidden
-				className="pointer-events-none absolute inset-0 z-[5]"
+			{/* Base dark tone so cards are darker initially */}
+			<div
+				className="absolute inset-0 z-0"
 				style={{
-					opacity: hovered ? 1 : 0,
-					transition: "opacity .25s ease-out",
 					background:
-						"linear-gradient(180deg, rgba(110,90,70,0.14) 0%, rgba(80,65,50,0.18) 100%)",
+						"radial-gradient(120% 120% at 50% 0%, rgba(80,65,50,0.12) 0%, rgba(60,50,40,0.18) 70%)",
 				}}
 			/>
 
+			{/* Hover darkening layer (sits under spotlight/tint to make lamp feel bright) */}
+					<motion.div
+						aria-hidden
+						className="pointer-events-none absolute inset-0 z-[5]"
+						style={{
+							background:
+								"linear-gradient(180deg, rgba(110, 90, 70, 0.18) 0%, rgba(80, 65, 50, 0.22) 100%)",
+						}}
+						animate={{ opacity: hovered ? 1 : 0 }}
+						transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+					/>
+
 					{/* Subtle following tint gradient for additional depth */}
-									<motion.div
-										aria-hidden
-										className="pointer-events-none absolute inset-0 z-10 mix-blend-screen"
-										style={{ background: tint, opacity: hovered ? 0.25 : 0, transition: "opacity .25s ease-out" }}
-									/>
+											<motion.div
+												aria-hidden
+												className="pointer-events-none absolute inset-0 z-10 mix-blend-screen"
+												style={{ background: tint }}
+												animate={{ opacity: hovered ? 0.25 : 0 }}
+												transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+											/>
 
 							{/* Debug ring visualizing spotlight edge */}
 							<motion.div
@@ -120,30 +146,34 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
 							/>
 
 					{/* Spotlight following cursor */}
-			<motion.div
-				aria-hidden
-								className="pointer-events-none absolute inset-0 z-10"
-				style={{ background: spotlight, opacity: hovered ? 1 : 0, transition: "opacity .25s ease-out" }}
-			/>
+					<motion.div
+						aria-hidden
+						className="pointer-events-none absolute inset-0 z-10"
+						style={{ background: spotlight }}
+						animate={{ opacity: hovered ? 1 : 0 }}
+						transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+					/>
 
 			{/* Drifting shadow offset from cursor */}
-			<motion.div
-				aria-hidden
-				className="pointer-events-none absolute inset-0 z-10"
-				style={{ background: shadow, opacity: hovered ? 1 : 0, transition: "opacity .25s ease-out" }}
-			/>
+					<motion.div
+						aria-hidden
+						className="pointer-events-none absolute inset-0 z-10"
+						style={{ background: shadow }}
+						animate={{ opacity: hovered ? 1 : 0 }}
+						transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+					/>
 
 			{/* Paper fibers texture - subtle */}
-			<motion.div
-				aria-hidden
-				className="pointer-events-none absolute inset-0 z-10"
+					<motion.div
+						aria-hidden
+						className="pointer-events-none absolute inset-0 z-10"
 						style={{
-							opacity: hovered ? 0.15 : 0,
-							transition: "opacity .25s ease-out",
 							backgroundImage: svgUrl,
 							backgroundSize: "180px 180px",
 						}}
-			/>
+						animate={{ opacity: hovered ? 0.15 : 0 }}
+						transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+					/>
 
 			{/* Content */}
 			<div className="relative z-20">
