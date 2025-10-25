@@ -152,7 +152,7 @@ export default function Home() {
         )}
         <div className={`my-8 md:my-16 text-center px-4 ${skipHeroAnimation ? '' : 'animate-fade-in'} relative z-10`}>
           <h2 className="text-xl md:text-lg text-matcha-800 mb-4 font-light tracking-wide">
-            Aspiring AI Engineer & Full Stack Developer
+            Full Stack & Mobile Developer
           </h2>
           <p className="text-base md:text-sm text-matcha-700/80 max-w-2xl mx-auto leading-relaxed font-light">
             Passionate about transforming ideas into impactful applications through innovative AI solutions and robust web development.
