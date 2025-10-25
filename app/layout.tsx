@@ -75,12 +75,15 @@ export const metadata = {
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 const calSans = LocalFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
-  display: "swap", // Add display swap for better loading
+  display: "swap",
+  weight: "600",
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -99,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
+      <body className={process.env.NODE_ENV === "development" ? "debug-screens" : ""}>
         {children}
       </body>
     </html>

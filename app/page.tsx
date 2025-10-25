@@ -62,16 +62,26 @@ export default function Home() {
     );
 
   return (
-    <div className="min-h-screen bg-gradient-to-tl from-black via-zinc-600/20 to-black">
+    <div className="min-h-screen relative">
+      {/* Subtle warm gradient overlay over paper texture */}
+      <div className="fixed inset-0 bg-gradient-to-br from-cream-200/20 via-transparent to-cream-300/20 pointer-events-none z-0"></div>
+      
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-matcha-300/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cream-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-matcha-200/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+      </div>
+      
       {/* Hero Section */}
-      <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden relative px-4">
-        <nav className={`my-8 md:my-16 ${skipHeroAnimation ? '' : 'animate-fade-in'}`}>
+      <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden relative px-4 z-10">
+        <nav className={`my-8 md:my-16 ${skipHeroAnimation ? '' : 'animate-fade-in'} relative z-10`}>
           <ul className="flex items-center justify-center gap-6 md:gap-4">
             {navigation.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-base md:text-sm duration-500 text-zinc-500 hover:text-zinc-300 cursor-pointer px-3 py-2 rounded-lg hover:bg-zinc-800/50 transition-all"
+                className="text-base md:text-sm font-light duration-300 text-matcha-700 hover:text-matcha-900 cursor-pointer px-4 py-2 rounded-xl hover:bg-matcha-100/50 backdrop-blur-sm transition-all hover:shadow-matcha-sm"
                 onClick={(e) => {
                   e.preventDefault();
                   if (item.href === "#resume") {
@@ -88,8 +98,8 @@ export default function Home() {
                         // Add a more noticeable highlight effect with staggered timing
                         setTimeout(() => {
                           icon.style.transform = 'scale(1.3)';
-                          icon.style.color = '#ffffff';
-                          icon.style.filter = 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))';
+                          icon.style.color = '#6fa051';
+                          icon.style.filter = 'drop-shadow(0 0 20px rgba(111, 160, 81, 0.8))';
                           icon.style.transition = 'all 0.3s ease';
                           
                           // Add a subtle bounce effect
@@ -122,61 +132,61 @@ export default function Home() {
           </ul>
         </nav>
         {!skipHeroAnimation && (
-          <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+          <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-matcha-300/0 via-matcha-400/60 to-matcha-300/0" />
         )}
 
         {/* Render Particles only when the component is mounted */}
         {isMounted && (
           <Particles
-            className="absolute inset-0 -z-10 animate-fade-in"
-            quantity={100}
+            className="absolute inset-0 -z-10 animate-fade-in opacity-40"
+            quantity={80}
           />
         )}
 
-        <h1 className={`py-3.5 px-0.5 z-10 text-5xl text-transparent duration-1000 bg-white cursor-default text-edge-outline font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text text-center ${skipHeroAnimation ? '' : 'animate-title'}`}>
+        <h1 className={`py-3.5 px-0.5 z-10 text-5xl duration-1000 text-matcha-700 cursor-default text-edge-outline font-display sm:text-6xl md:text-9xl whitespace-nowrap text-center ${skipHeroAnimation ? '' : 'animate-title'}`}>
           Ryan Nguyen
         </h1>
 
         {!skipHeroAnimation && (
-          <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+          <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-matcha-300/0 via-matcha-400/60 to-matcha-300/0" />
         )}
-        <div className={`my-8 md:my-16 text-center px-4 ${skipHeroAnimation ? '' : 'animate-fade-in'}`}>
-          <h2 className="text-xl md:text-lg text-zinc-300 mb-4 font-medium">
+        <div className={`my-8 md:my-16 text-center px-4 ${skipHeroAnimation ? '' : 'animate-fade-in'} relative z-10`}>
+          <h2 className="text-xl md:text-lg text-matcha-800 mb-4 font-light tracking-wide">
             Aspiring AI Engineer & Full Stack Developer
           </h2>
-          <p className="text-base md:text-sm text-zinc-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-sm text-matcha-700/80 max-w-2xl mx-auto leading-relaxed font-light">
             Passionate about transforming ideas into impactful applications through innovative AI solutions and robust web development.
           </p>
         </div>
         
         {/* Scroll indicator */}
-        <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 ${showScrollIndicator ? 'opacity-100 animate-bounce' : 'opacity-0'}`}>
-          <div className="w-6 h-10 border-2 border-zinc-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-zinc-400 rounded-full mt-2 animate-pulse"></div>
+        <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 ${showScrollIndicator ? 'opacity-100 animate-gentle-bounce' : 'opacity-0'} z-10`}>
+          <div className="w-6 h-10 border-2 border-matcha-500 rounded-full flex justify-center backdrop-blur-sm bg-cream-50/30">
+            <div className="w-1 h-3 bg-matcha-500 rounded-full mt-2 animate-pulse-soft"></div>
           </div>
         </div>
       </div>
 
 
       {/* Projects Section */}
-      <div id="projects" className={`relative pb-16 ${skipHeroAnimation ? '' : 'animate-fade-in'}`}>
+      <div id="projects" className={`relative pb-16 ${skipHeroAnimation ? '' : 'animate-fade-in'} z-10`}>
         <div className="px-4 pt-12 mx-auto space-y-6 max-w-7xl sm:px-6 md:space-y-8 md:pt-20 lg:px-8 md:space-y-16 lg:pt-32">
           <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
-            <h2 className="text-4xl font-bold tracking-tight text-zinc-100 sm:text-5xl md:text-3xl lg:text-4xl">
+            <h2 className="text-4xl font-bold tracking-tight text-matcha-900 sm:text-5xl md:text-3xl lg:text-4xl font-display">
               Projects
             </h2>
-            <p className="mt-4 text-base md:text-sm text-zinc-400 leading-relaxed">
+            <p className="mt-4 text-base md:text-sm text-matcha-700/80 leading-relaxed font-light">
               A showcase of my innovative projects and collaborative efforts in AI, web development, and software engineering.
             </p>
           </div>
-          <div className="w-full h-px bg-zinc-800" />
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-matcha-300/50 to-transparent" />
 
           <div className="grid grid-cols-1 gap-6 mx-auto lg:grid-cols-2 lg:gap-8">
             <Card>
               <Link href={`/projects/${featured.slug}`}>
                 <article className="relative w-full h-full p-6 md:p-8">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="text-sm md:text-xs text-zinc-100">
+                    <div className="text-sm md:text-xs text-matcha-700 font-light">
                       {featured.date ? (
                         <time dateTime={new Date(featured.date).toISOString()}>
                           {Intl.DateTimeFormat(undefined, {
@@ -187,29 +197,29 @@ export default function Home() {
                         <span>SOON</span>
                       )}
                     </div>
-                    <span className="flex items-center gap-1 text-xs text-zinc-500">
+                    <span className="flex items-center gap-1 text-xs text-matcha-600">
                     </span>
                   </div>
 
                   <h2
                     id="featured-post"
-                    className="mt-4 text-2xl font-bold text-zinc-100 group-hover:text-white sm:text-3xl md:text-4xl font-display"
+                    className="mt-2 text-2xl font-bold text-matcha-900 group-hover:text-matcha-800 sm:text-3xl md:text-4xl font-display"
                   >
                     {featured.title}
                   </h2>
-                  <p className="mt-4 text-base md:text-sm leading-6 md:leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
+                  <p className="mt-2 text-base md:text-sm leading-6 md:leading-8 duration-150 text-matcha-700/80 group-hover:text-matcha-800 font-light">
                     {featured.description}
                   </p>
                   <div className="absolute bottom-8">
-                    <p className="text-zinc-200 hover:text-zinc-50 text-sm md:text-base">
-                      Read more <span aria-hidden="true">&rarr;</span>
+                    <p className="text-matcha-600 hover:text-matcha-800 text-sm md:text-base font-medium flex items-center gap-2">
+                      Read more <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
                     </p>
                   </div>
                 </article>
               </Link>
             </Card>
 
-            <div className="flex flex-col w-full gap-6 mx-auto border-t border-gray-900/10 lg:mx-0 lg:border-t-0 lg:gap-8">
+            <div className="flex flex-col w-full gap-6 mx-auto border-t border-matcha-200/30 lg:mx-0 lg:border-t-0 lg:gap-8">
               {[top2, top3].map((project) => (
                 <Card key={project.slug}>
                   <Article project={project} views={views[project.slug] ?? 0} />
@@ -217,7 +227,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="hidden w-full h-px md:block bg-zinc-800" />
+          <div className="hidden w-full h-px md:block bg-gradient-to-r from-transparent via-matcha-300/50 to-transparent" />
 
           <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 sm:grid-cols-2 md:grid-cols-3">
             {sorted.map((project) => (
@@ -232,19 +242,19 @@ export default function Home() {
       {/* Resume Modal */}
       {showResumeModal && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-matcha-900/60 backdrop-blur-md px-4"
           style={{ animation: 'fadeIn 0.2s ease-in-out' }}
           onClick={() => setShowResumeModal(false)}
         >
           <div 
-            className="relative bg-gradient-to-br from-zinc-900 to-zinc-800 border border-zinc-700 rounded-2xl p-8 max-w-md w-full shadow-2xl"
+            className="relative bg-gradient-to-br from-cream-50 to-matcha-50 border-2 border-matcha-300/40 rounded-3xl p-8 max-w-md w-full shadow-matcha-xl"
             style={{ animation: 'fadeIn 0.3s ease-in-out' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
             <button
               onClick={() => setShowResumeModal(false)}
-              className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-100 transition-colors p-2 hover:bg-zinc-700/50 rounded-lg"
+              className="absolute top-4 right-4 text-matcha-600 hover:text-matcha-900 transition-colors p-2 hover:bg-matcha-100/50 rounded-xl"
               aria-label="Close"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -254,14 +264,14 @@ export default function Home() {
 
             <div className="text-center">
               {/* Icon */}
-              <div className="mx-auto w-16 h-16 bg-zinc-700/50 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="mx-auto w-16 h-16 bg-matcha-100 rounded-2xl flex items-center justify-center mb-6 shadow-matcha-sm">
+                <svg className="w-8 h-8 text-matcha-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
 
-              <h3 className="text-2xl font-bold text-zinc-100 mb-2">My Resume</h3>
-              <p className="text-zinc-400 mb-8 text-sm">
+              <h3 className="text-2xl font-bold text-matcha-900 mb-2 font-display">My Resume</h3>
+              <p className="text-matcha-700/80 mb-8 text-sm font-light">
                 View my qualifications, experience, and skills
               </p>
 
@@ -271,7 +281,7 @@ export default function Home() {
                   href="/Ryan%20Nguyen%20Resume%202025.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-zinc-100 hover:bg-white text-zinc-900 font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  className="block w-full bg-matcha-600 hover:bg-matcha-700 text-cream-50 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-matcha-md"
                 >
                   <span className="flex items-center justify-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -285,7 +295,7 @@ export default function Home() {
                 <a
                   href="/Ryan%20Nguyen%20Resume%202025.pdf"
                   download="Ryan_Nguyen_Resume.pdf"
-                  className="block w-full bg-zinc-700 hover:bg-zinc-600 text-zinc-100 font-medium py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105"
+                  className="block w-full bg-cream-200 hover:bg-cream-300 text-matcha-900 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105"
                 >
                   <span className="flex items-center justify-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -301,10 +311,10 @@ export default function Home() {
       )}
 
       {/* Footer */}
-      <footer id="contact" className="border-t border-zinc-800 bg-zinc-900/50">
+      <footer id="contact" className="relative border-t border-matcha-200/30 bg-gradient-to-br from-cream-100/80 to-matcha-100/50 backdrop-blur-sm z-10">
         <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 md:py-12 lg:px-8">
           <div className="flex flex-col items-center justify-between space-y-6 md:flex-row md:space-y-0">
-            <div className="text-sm text-zinc-400 text-center md:text-left">
+            <div className="text-sm text-matcha-700/80 text-center md:text-left font-light">
               © 2024 Ryan Nguyen. All rights reserved.
             </div>
             <div className="flex space-x-8">
@@ -312,7 +322,7 @@ export default function Home() {
                 href="https://github.com/rnguyen03" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-zinc-300 transition-all duration-300 hover:scale-110 p-2 rounded-lg hover:bg-zinc-800/50"
+                className="text-matcha-600 hover:text-matcha-900 transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-matcha-100/50"
                 aria-label="GitHub"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -323,7 +333,7 @@ export default function Home() {
                 href="https://www.linkedin.com/in/ryannguyenuog/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-zinc-400 hover:text-zinc-300 transition-all duration-300 hover:scale-110 p-2 rounded-lg hover:bg-zinc-800/50"
+                className="text-matcha-600 hover:text-matcha-900 transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-matcha-100/50"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -332,7 +342,7 @@ export default function Home() {
               </a>
               <a 
                 href="mailto:ryanvannguyen@gmail.com"
-                className="text-zinc-400 hover:text-zinc-300 transition-all duration-300 hover:scale-110 p-2 rounded-lg hover:bg-zinc-800/50"
+                className="text-matcha-600 hover:text-matcha-900 transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-matcha-100/50"
                 aria-label="Email"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">

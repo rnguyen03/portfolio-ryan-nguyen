@@ -17,18 +17,26 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
 		mouseX.set(clientX - left);
 		mouseY.set(clientY - top);
 	}
-	const maskImage = useMotionTemplate`radial-gradient(240px at ${mouseX}px ${mouseY}px, white, transparent)`;
+	const maskImage = useMotionTemplate`radial-gradient(280px at ${mouseX}px ${mouseY}px, white, transparent)`;
 	const style = { maskImage, WebkitMaskImage: maskImage };
 
 	return (
 		<div
 			onMouseMove={onMouseMove}
-			className="overflow-hidden relative duration-700 border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-zinc-600 "
+			className="overflow-hidden relative duration-500 border-2 rounded-2xl group md:gap-8 hover:border-matcha-400/60 border-matcha-300/40 hover:shadow-matcha-md shadow-cream transition-all hover:-translate-y-1"
+			style={{
+				backgroundImage: 'url(/paper.jpg)',
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+			}}
 		>
+			{/* White overlay for readability */}
+			<div className="absolute inset-0 bg-gradient-to-b from-white/92 to-cream-50/95 z-0"></div>
+			
 			<div className="pointer-events-none">
-				<div className="absolute inset-0 z-0  transition duration-1000 [mask-image:linear-gradient(black,transparent)]" />
+				<div className="absolute inset-0 z-0 transition duration-1000 [mask-image:linear-gradient(black,transparent)]" />
 				<motion.div
-					className="absolute inset-0 z-10  bg-gradient-to-br opacity-100  via-zinc-100/10  transition duration-1000 group-hover:opacity-50 "
+					className="absolute inset-0 z-10 bg-gradient-to-br opacity-100 via-matcha-200/15 transition duration-1000 group-hover:opacity-50"
 					style={style}
 				/>
 				<motion.div
