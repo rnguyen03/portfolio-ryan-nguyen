@@ -76,7 +76,6 @@ module.exports = {
 				"pulse-soft": "pulse-soft 3s ease-in-out infinite",
 				"float": "float 6s ease-in-out infinite",
 				"glow-pulse": "glow-pulse 2s ease-in-out infinite",
-				"glow": "glow 2s ease-in-out infinite alternate",
 			},
 			keyframes: {
 				"fade-in": {
@@ -174,14 +173,6 @@ module.exports = {
 					},
 					"50%": {
 						boxShadow: "0 0 40px rgba(168, 204, 143, 0.6)",
-					},
-				},
-				"glow": {
-					"0%": {
-						opacity: "0.5",
-					},
-					"100%": {
-						opacity: "1",
 					},
 				},
 			},
