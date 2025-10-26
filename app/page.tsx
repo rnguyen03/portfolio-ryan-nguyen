@@ -81,7 +81,7 @@ export default function Home() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-base md:text-sm font-light duration-300 text-matcha-700 hover:text-matcha-900 cursor-pointer px-4 py-2 rounded-xl hover:bg-matcha-100/50 backdrop-blur-sm transition-all hover:shadow-matcha-sm"
+                className="text-base md:text-sm font-light duration-300 text-subink hover:text-matcha-dark cursor-pointer px-4 py-2 rounded-xl hover:bg-latte/30 backdrop-blur-sm transition-all hover:shadow-matcha-sm"
                 onClick={(e) => {
                   e.preventDefault();
                   if (item.href === "#resume") {
@@ -143,7 +143,7 @@ export default function Home() {
           />
         )}
 
-        <h1 className={`py-3.5 px-0.5 z-10 text-5xl duration-1000 text-matcha-700 cursor-default text-edge-outline font-display sm:text-6xl md:text-9xl whitespace-nowrap text-center ${skipHeroAnimation ? '' : 'animate-title'}`}>
+        <h1 className={`py-3.5 px-0.5 z-10 text-5xl duration-1000 text-matcha cursor-default font-display sm:text-6xl md:text-9xl whitespace-nowrap text-center ${skipHeroAnimation ? '' : 'animate-title'}`} style={{ textShadow: '0 4px 12px rgba(95, 125, 78, 0.25), 0 0 30px rgba(167, 196, 154, 0.15)' }}>
           Ryan Nguyen
         </h1>
 
@@ -151,10 +151,10 @@ export default function Home() {
           <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-matcha-300/0 via-matcha-400/60 to-matcha-300/0" />
         )}
         <div className={`my-8 md:my-16 text-center px-4 ${skipHeroAnimation ? '' : 'animate-fade-in'} relative z-10`}>
-          <h2 className="text-xl md:text-lg text-matcha-800 mb-4 font-light tracking-wide">
+          <h2 className="text-xl md:text-lg text-matcha-dark mb-4 font-light tracking-wide">
             Aspiring AI Engineer & Full Stack Developer
           </h2>
-          <p className="text-base md:text-sm text-matcha-700/80 max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="text-base md:text-sm text-subink max-w-2xl mx-auto leading-relaxed font-light">
             Passionate about transforming ideas into impactful applications through innovative AI solutions and robust web development.
           </p>
         </div>
@@ -172,21 +172,21 @@ export default function Home() {
       <div id="projects" className={`relative pb-16 ${skipHeroAnimation ? '' : 'animate-fade-in'} z-10`}>
         <div className="px-4 pt-12 mx-auto space-y-6 max-w-7xl sm:px-6 md:space-y-8 md:pt-20 lg:px-8 md:space-y-16 lg:pt-32">
           <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
-            <h2 className="text-4xl font-bold tracking-tight text-matcha-900 sm:text-5xl md:text-3xl lg:text-4xl font-display">
+            <h2 className="text-4xl font-semibold tracking-tight text-matcha sm:text-5xl md:text-3xl lg:text-4xl font-display">
               Projects
             </h2>
-            <p className="mt-4 text-base md:text-sm text-matcha-700/80 leading-relaxed font-light">
+            <p className="mt-4 text-base md:text-sm text-subink leading-relaxed font-light">
               A showcase of my innovative projects and collaborative efforts in AI, web development, and software engineering.
             </p>
           </div>
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-matcha-300/50 to-transparent" />
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-line/70 to-transparent" />
 
           <div className="grid grid-cols-1 gap-6 mx-auto lg:grid-cols-2 lg:gap-8">
             <Card>
               <Link href={`/projects/${featured.slug}`}>
-                <article className="relative w-full h-full p-6 md:p-8 pb-16 md:pb-20">
+                <article className="relative group w-full h-full p-6 md:p-8 flex flex-col">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="text-sm md:text-xs text-matcha-700 font-light">
+                    <div className="text-sm md:text-xs text-subink font-light">
                       {featured.date ? (
                         <time dateTime={new Date(featured.date).toISOString()}>
                           {Intl.DateTimeFormat(undefined, {
@@ -197,21 +197,21 @@ export default function Home() {
                         <span>SOON</span>
                       )}
                     </div>
-                    <span className="flex items-center gap-1 text-xs text-matcha-600">
+                    <span className="flex items-center gap-1 text-xs text-subink">
                     </span>
                   </div>
 
                   <h2
                     id="featured-post"
-                    className="mt-2 text-2xl font-bold text-matcha-900 group-hover:text-matcha-800 sm:text-3xl md:text-4xl font-display"
+                    className="mt-2 text-2xl font-semibold text-matcha sm:text-3xl md:text-4xl font-display"
                   >
                     {featured.title}
                   </h2>
-                  <p className="mt-2 text-base md:text-sm leading-6 md:leading-8 duration-150 text-matcha-700/80 group-hover:text-matcha-800 font-light">
+                  <p className="mt-2 text-base md:text-sm leading-6 md:leading-8 duration-150 text-subink group-hover:text-matcha-dark font-light">
                     {featured.description}
                   </p>
-                  <div className="absolute bottom-6 md:bottom-8">
-                    <p className="text-matcha-600 hover:text-matcha-800 text-sm md:text-base font-medium flex items-center gap-2">
+                  <div className="mt-auto pt-6 md:pt-8">
+                    <p className="text-matcha hover:text-matcha-light text-sm md:text-base font-medium flex items-center gap-2">
                       Read more <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
                     </p>
                   </div>
@@ -219,7 +219,7 @@ export default function Home() {
               </Link>
             </Card>
 
-            <div className="flex flex-col w-full gap-6 mx-auto border-t border-matcha-200/30 lg:mx-0 lg:border-t-0 lg:gap-8">
+            <div className="flex flex-col w-full gap-6 mx-auto border-t border-line/30 lg:mx-0 lg:border-t-0 lg:gap-8">
               {[top2, top3].map((project) => (
                 <Card key={project.slug}>
                   <Article project={project} views={views[project.slug] ?? 0} />
@@ -227,7 +227,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="hidden w-full h-px md:block bg-gradient-to-r from-transparent via-matcha-300/50 to-transparent" />
+          <div className="hidden w-full h-px md:block bg-gradient-to-r from-transparent via-line/70 to-transparent" />
 
           <div className="grid grid-cols-1 gap-4 mx-auto lg:mx-0 sm:grid-cols-2 md:grid-cols-3">
             {sorted.map((project) => (
@@ -247,14 +247,14 @@ export default function Home() {
           onClick={() => setShowResumeModal(false)}
         >
           <div 
-            className="relative bg-gradient-to-br from-cream-50 to-matcha-50 border-2 border-matcha-300/40 rounded-3xl p-8 max-w-md w-full shadow-matcha-xl"
+            className="relative bg-gradient-to-br from-card to-latte border-2 border-line/60 rounded-3xl p-8 max-w-md w-full shadow-matcha-xl"
             style={{ animation: 'fadeIn 0.3s ease-in-out' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
             <button
               onClick={() => setShowResumeModal(false)}
-              className="absolute top-4 right-4 text-matcha-600 hover:text-matcha-900 transition-colors p-2 hover:bg-matcha-100/50 rounded-xl"
+              className="absolute top-4 right-4 text-matcha hover:text-matcha-dark transition-colors p-2 hover:bg-latte/50 rounded-xl"
               aria-label="Close"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -264,14 +264,14 @@ export default function Home() {
 
             <div className="text-center">
               {/* Icon */}
-              <div className="mx-auto w-16 h-16 bg-matcha-100 rounded-2xl flex items-center justify-center mb-6 shadow-matcha-sm">
-                <svg className="w-8 h-8 text-matcha-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="mx-auto w-16 h-16 bg-latte rounded-2xl flex items-center justify-center mb-6 shadow-matcha-sm">
+                <svg className="w-8 h-8 text-matcha" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
 
-              <h3 className="text-2xl font-bold text-matcha-900 mb-2 font-display">My Resume</h3>
-              <p className="text-matcha-700/80 mb-8 text-sm font-light">
+              <h3 className="text-2xl font-semibold text-matcha mb-2 font-display">My Resume</h3>
+              <p className="text-subink mb-8 text-sm font-light">
                 View my qualifications, experience, and skills
               </p>
 
@@ -281,7 +281,7 @@ export default function Home() {
                   href="/Ryan%20Nguyen%20Resume%202025.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-matcha-600 hover:bg-matcha-700 text-cream-50 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-matcha-md"
+                  className="block w-full bg-matcha hover:bg-matcha-dark text-cream-50 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-matcha-md"
                 >
                   <span className="flex items-center justify-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -295,7 +295,7 @@ export default function Home() {
                 <a
                   href="/Ryan%20Nguyen%20Resume%202025.pdf"
                   download="Ryan_Nguyen_Resume.pdf"
-                  className="block w-full bg-cream-200 hover:bg-cream-300 text-matcha-900 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105"
+                  className="block w-full bg-card hover:bg-latte text-matcha-dark hover:text-matcha font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105"
                 >
                   <span className="flex items-center justify-center gap-2">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -311,10 +311,10 @@ export default function Home() {
       )}
 
       {/* Footer */}
-      <footer id="contact" className="relative border-t border-matcha-200/30 bg-gradient-to-br from-cream-100/80 to-matcha-100/50 backdrop-blur-sm z-10">
+      <footer id="contact" className="relative border-t border-line/50 bg-gradient-to-br from-card/70 to-latte/40 backdrop-blur-sm z-10">
         <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 md:py-12 lg:px-8">
           <div className="flex flex-col items-center justify-between space-y-6 md:flex-row md:space-y-0">
-            <div className="text-sm text-matcha-700/80 text-center md:text-left font-light">
+            <div className="text-sm text-subink text-center md:text-left font-light">
               © 2024 Ryan Nguyen. All rights reserved.
             </div>
             <div className="flex space-x-8">
@@ -322,7 +322,7 @@ export default function Home() {
                 href="https://github.com/rnguyen03" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-matcha-600 hover:text-matcha-900 transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-matcha-100/50"
+                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40"
                 aria-label="GitHub"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -333,7 +333,7 @@ export default function Home() {
                 href="https://www.linkedin.com/in/ryannguyenuog/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-matcha-600 hover:text-matcha-900 transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-matcha-100/50"
+                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -342,7 +342,7 @@ export default function Home() {
               </a>
               <a 
                 href="mailto:ryanvannguyen@gmail.com"
-                className="text-matcha-600 hover:text-matcha-900 transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-matcha-100/50"
+                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40"
                 aria-label="Email"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">

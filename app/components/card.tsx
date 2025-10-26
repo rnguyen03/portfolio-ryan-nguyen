@@ -100,8 +100,8 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
   const shy = useTransform(myRaw, [0, 1], [12, 146]);
 
   // Smaller, brighter spotlight + softer shadow
-  const spotlight = useMotionTemplate`radial-gradient(260px 260px at ${sx}% ${sy}%, rgba(255,254,247,0.95) 0%, rgba(255,250,235,0.50) 30%, rgba(255,244,220,0.20) 52%, transparent 68%)`;
-  const shadow = useMotionTemplate`radial-gradient(420px 420px at ${shx}% ${shy}%, rgba(96,78,58,0.10) 0%, rgba(120,100,78,0.06) 40%, transparent 64%)`;
+  const spotlight = useMotionTemplate`radial-gradient(260px 260px at ${sx}% ${sy}%, rgba(255,253,242,0.96) 0%, rgba(252,246,229,0.55) 30%, rgba(248,239,214,0.22) 52%, transparent 68%)`;
+  const shadow = useMotionTemplate`radial-gradient(420px 420px at ${shx}% ${shy}%, rgba(71,86,62,0.10) 0%, rgba(95,125,78,0.07) 40%, transparent 64%)`;
 
   // Compose the edge-shadow background
   const edgeShadows = useMotionTemplate`
@@ -120,7 +120,7 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
 
   // Subtle tonal gradient that follows the cursor (soft light ivory tint, no green)
   // Lightening tint (flipped to illuminate, no dark wedge)
-  const tint = useMotionTemplate`conic-gradient(from 0deg at ${sx}% ${sy}%, rgba(255,255,250,0.20) 0deg, rgba(255,255,255,0.00) 140deg, rgba(255,250,235,0.12) 260deg, rgba(255,255,250,0.20) 360deg)`;
+  const tint = useMotionTemplate`conic-gradient(from 0deg at ${sx}% ${sy}%, rgba(255,252,242,0.20) 0deg, rgba(167,196,154,0.06) 80deg, rgba(255,248,231,0.12) 220deg, rgba(255,252,242,0.20) 360deg)`;
   const easeCurve = useMemo(() => cubicBezier(0.22, 1, 0.36, 1), []);
 
   const scheduleRecenter = useCallback(async () => {
@@ -140,7 +140,7 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
   }, [easeCurve, hoverProgress, mxRaw, myRaw]);
 
   // Debug ring – a thin edge to make spotlight motion unmistakable
-  const ring = useMotionTemplate`radial-gradient(260px 260px at ${sx}% ${sy}%, transparent 60%, rgba(90,70,50,0.35) 63%, rgba(90,70,50,0.35) 66%, transparent 70%)`;
+  const ring = useMotionTemplate`radial-gradient(260px 260px at ${sx}% ${sy}%, transparent 60%, rgba(95,125,78,0.35) 63%, rgba(95,125,78,0.35) 66%, transparent 70%)`;
 
   function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
     if (!ref.current) return;
@@ -172,9 +172,10 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
       onPointerMove={onPointerMove}
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
-      className="relative overflow-hidden rounded-2xl border-2 border-matcha-300/40 bg-clip-padding"
+      className="relative overflow-hidden rounded-2xl border-2 border-line/60 bg-clip-padding"
       style={{
         backgroundImage: "url(/paper.jpg)",
+        backgroundColor: "#EEE7D8", // card-bg fallback
         backgroundSize: "cover",
         backgroundPosition: "center",
         rotateX: rX,
@@ -190,7 +191,7 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
         className="absolute inset-0 z-0"
         style={{
           background:
-            "radial-gradient(120% 120% at 50% 0%, rgba(80,65,50,0.12) 0%, rgba(60,50,40,0.18) 70%)",
+            "radial-gradient(120% 120% at 50% 0%, rgba(129,112,93,0.12) 0%, rgba(98,84,68,0.18) 70%)",
         }}
       />
 
@@ -201,7 +202,7 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
         style={{
           opacity: darkA,
           background:
-            "linear-gradient(180deg, rgba(110, 90, 70, 0.18) 0%, rgba(80, 65, 50, 0.22) 100%)",
+            "linear-gradient(180deg, rgba(156,137,115,0.18) 0%, rgba(119,101,82,0.22) 100%)",
           willChange: "opacity",
         }}
       />

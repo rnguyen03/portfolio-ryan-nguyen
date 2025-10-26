@@ -11,7 +11,15 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				// Semantic palette: "Matcha Stationery" (revised - warm café tones)
+				paper: "#F5F1E6",
+				card: "#EEE7D8",
+				ink: "#2F2B24",
+				subink: "#6C6A5C",
 				matcha: {
+					DEFAULT: "#5F7D4E",
+					light: "#A7C49A",
+					dark: "#3E5C34",
 					50: '#f7faf5',
 					100: '#eef5e8',
 					200: '#dcebd1',
@@ -23,6 +31,19 @@ module.exports = {
 					800: '#476636',
 					900: '#3a522d',
 					950: '#1e2d18',
+				},
+				latte: "#D3BCA2",
+				clay: "#C78B6C",
+				line: "#D9D2C3",
+				// Legacy aliases for gradual migration
+				text: "#2F2B24",
+				subtext: "#6C6A5C",
+				border: "#D9D2C3",
+				creamAccent: "#F5F1E6",
+				matchaBrand: {
+					DEFAULT: "#5F7D4E",
+					light: "#A7C49A",
+					dark: "#3E5C34",
 				},
 				cream: {
 					50: '#fefdfb',
