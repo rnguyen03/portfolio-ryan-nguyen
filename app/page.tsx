@@ -184,7 +184,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 mx-auto lg:grid-cols-2 lg:gap-8">
             <Card>
               <Link href={`/projects/${featured.slug}`}>
-                <article className="relative w-full h-full p-6 md:p-8">
+                <article className="relative w-full h-full p-6 md:p-8 pb-16 md:pb-20">
                   <div className="flex items-center justify-between gap-2">
                     <div className="text-sm md:text-xs text-matcha-700 font-light">
                       {featured.date ? (
@@ -210,7 +210,7 @@ export default function Home() {
                   <p className="mt-2 text-base md:text-sm leading-6 md:leading-8 duration-150 text-matcha-700/80 group-hover:text-matcha-800 font-light">
                     {featured.description}
                   </p>
-                  <div className="absolute bottom-8">
+                  <div className="absolute bottom-6 md:bottom-8">
                     <p className="text-matcha-600 hover:text-matcha-800 text-sm md:text-base font-medium flex items-center gap-2">
                       Read more <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
                     </p>
