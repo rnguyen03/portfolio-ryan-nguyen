@@ -191,7 +191,7 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
         className="absolute inset-0 z-0"
         style={{
           background:
-            "radial-gradient(120% 120% at 50% 0%, rgba(129,112,93,0.12) 0%, rgba(98,84,68,0.18) 70%)",
+            "radial-gradient(120% 120% at 50% 0%, rgba(169, 163, 121, 0.12) 0%, rgba(135, 126, 94, 0.18) 70%)",
         }}
       />
 

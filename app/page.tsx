@@ -7,10 +7,16 @@ import { allProjects } from "contentlayer/generated";
 import { Card } from "./components/card";
 import { Article } from "./projects/article";
 
-const navigation = [
-  { name: "Projects", href: "#projects" },
-  { name: "Resume", href: "#resume" },
-  { name: "Contact", href: "#contact" },
+type NavItem = {
+  name: string;
+  href: string;
+  kind?: "modal" | "scroll";
+};
+
+const navigation: NavItem[] = [
+  { name: "Projects", href: "#projects", kind: "scroll" },
+  { name: "Resume", href: "#resume", kind: "modal" },
+  { name: "Contact", href: "#contact", kind: "scroll" },
 ];
 
 export default function Home() {
@@ -37,6 +43,48 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, []);
+
+  const handleNavClick = (item: NavItem) => {
+    if (item.kind === "modal") {
+      setShowResumeModal(true);
+      return;
+    }
+
+    if (item.href === "#contact") {
+      document.querySelector("footer")?.scrollIntoView({ behavior: "smooth" });
+      // Add highlight effect to contact icons
+      setTimeout(() => {
+        const contactIcons = document.querySelectorAll('footer a') as NodeListOf<HTMLElement>;
+        contactIcons.forEach((icon, index) => {
+          setTimeout(() => {
+            icon.style.transform = 'scale(1.3)';
+            icon.style.color = '#6fa051';
+            icon.style.filter = 'drop-shadow(0 0 20px rgba(111, 160, 81, 0.8))';
+            icon.style.transition = 'all 0.3s ease';
+            
+            setTimeout(() => {
+              icon.style.transform = 'scale(1.1)';
+              setTimeout(() => {
+                icon.style.transform = 'scale(1.3)';
+              }, 150);
+            }, 200);
+            
+            setTimeout(() => {
+              icon.style.transform = 'scale(1)';
+              icon.style.color = '';
+              icon.style.filter = '';
+            }, 2500);
+          }, index * 200);
+        });
+      }, 500);
+      return;
+    }
+
+    const target = document.querySelector(item.href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   // Get projects data
   const views = allProjects.reduce((acc, project) => {
@@ -83,61 +131,100 @@ export default function Home() {
       
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden relative px-4 z-10">
-        <nav className={`my-8 md:my-16 ${skipHeroAnimation ? '' : 'animate-fade-in'} relative z-10 backdrop-blur-md bg-paper/60 rounded-2xl px-6 py-3 border border-line/40 shadow-cream`}>
-          <ul className="flex items-center justify-center gap-6 md:gap-4">
-            {navigation.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-base md:text-sm font-light duration-300 text-subink hover:text-matcha-dark cursor-pointer px-4 py-2 rounded-xl hover:bg-latte/30 backdrop-blur-sm transition-all hover:shadow-matcha-sm"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (item.href === "#resume") {
-                    setShowResumeModal(true);
-                  } else if (item.href === "#contact") {
-                    // Scroll to footer and highlight contact icons
-                    document.querySelector('footer')?.scrollIntoView({
-                      behavior: 'smooth'
-                    });
-                    // Add highlight effect to contact icons
-                    setTimeout(() => {
-                      const contactIcons = document.querySelectorAll('footer a') as NodeListOf<HTMLElement>;
-                      contactIcons.forEach((icon, index) => {
-                        // Add a more noticeable highlight effect with staggered timing
-                        setTimeout(() => {
-                          icon.style.transform = 'scale(1.3)';
-                          icon.style.color = '#6fa051';
-                          icon.style.filter = 'drop-shadow(0 0 20px rgba(111, 160, 81, 0.8))';
-                          icon.style.transition = 'all 0.3s ease';
-                          
-                          // Add a subtle bounce effect
-                          setTimeout(() => {
-                            icon.style.transform = 'scale(1.1)';
-                            setTimeout(() => {
-                              icon.style.transform = 'scale(1.3)';
-                            }, 150);
-                          }, 200);
-                          
-                          // Remove the effect after 2.5 seconds
-                          setTimeout(() => {
-                            icon.style.transform = 'scale(1)';
-                            icon.style.color = '';
-                            icon.style.filter = '';
-                          }, 2500);
-                        }, index * 200); // Stagger each icon by 200ms
-                      });
-                    }, 500);
-                  } else {
-                    document.querySelector(item.href)?.scrollIntoView({
-                      behavior: 'smooth'
-                    });
-                  }
-                }}
-              >
-                {item.name}
-              </a>
-            ))}
-          </ul>
+        <nav
+          className={`my-8 md:my-16 ${
+            skipHeroAnimation ? "" : "animate-fade-in"
+          } relative z-10`}
+        >
+          <div
+            className="
+              inline-flex items-center justify-center
+              rounded-full border border-line/30
+              bg-cream/85 backdrop-blur-md
+              px-3 py-1.5 md:px-5 md:py-2
+              shadow-[0_6px_18px_rgba(0,0,0,0.04)]
+            "
+          >
+            <ul className="flex items-center justify-center gap-1.5 md:gap-3">
+              {navigation.map((item) => (
+                <li key={item.href}>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick(item)}
+                    className="
+                      group relative inline-flex items-center justify-center
+                      rounded-full px-3.5 py-1.5 md:px-4 md:py-1.5
+                      text-[13px] md:text-xs font-light tracking-[0.12em] uppercase
+                      text-subink/90
+                      transition-colors duration-200
+                      focus-visible:outline-none focus-visible:ring-2
+                      focus-visible:ring-matcha/45 focus-visible:ring-offset-2
+                      focus-visible:ring-offset-transparent
+                      hover:text-matcha-dark focus-visible:text-matcha-dark
+                    "
+                  >
+
+                    {/* Main rough pencil stroke (with noise texture) */}
+                    <span
+                      className="
+                        pointer-events-none absolute bottom-[2px] left-3 right-3
+                        h-[2px]
+                        origin-left scale-x-0 translate-y-[0.5px]
+                        transition-transform duration-300 ease-out
+                        group-hover:scale-x-100 group-focus-visible:scale-x-100
+                        opacity-0 group-hover:opacity-85 group-focus-visible:opacity-85
+                        rounded-sm
+                        bg-[rgba(90,75,60,0.8)]
+                        [background-image:repeating-linear-gradient(90deg,rgba(0,0,0,0.18)_0px,rgba(0,0,0,0.18)_1px,transparent_1px,transparent_3px)]
+                        [filter:blur(0.4px)]
+                        [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]
+                        z-10
+                      "
+                    />
+
+                    {/* Slight offset echo stroke (lighter graphite) */}
+                    <span
+                      className="
+                        pointer-events-none absolute bottom-[3px] left-3 right-6
+                        h-[1.5px]
+                        origin-left scale-x-0 translate-y-[0.5px]
+                        transition-transform duration-500 ease-out
+                        group-hover:scale-x-100 group-focus-visible:scale-x-100
+                        opacity-0 group-hover:opacity-60 group-focus-visible:opacity-60
+                        rounded-sm
+                        bg-[rgba(120,105,90,0.4)]
+                        [filter:blur(0.2px)]
+                        z-10
+                      "
+                    />
+
+                    {/* Imperfection gaps (pencil skipping over paper) */}
+                    <span
+                      className="
+                        pointer-events-none absolute bottom-[2px] left-3 right-3
+                        h-[2px]
+                        origin-left scale-x-0
+                        transition-transform duration-300 ease-out
+                        group-hover:scale-x-100 group-focus-visible:scale-x-100
+                        opacity-0 group-hover:opacity-40 group-focus-visible:opacity-40
+                        bg-gradient-to-r
+                          from-transparent
+                          via-[rgba(0,0,0,0.35)]
+                          to-transparent
+                        [mask-image:radial-gradient(circle_at_10%_50%,transparent_0%,black_40%,transparent_80%)]
+                        [background-size:8px_100%]
+                        z-10
+                      "
+                    />
+
+                    <span className="relative z-20">
+                      {item.name}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </nav>
         {!skipHeroAnimation && (
           <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-matcha-300/0 via-matcha-400/60 to-matcha-300/0" />
@@ -181,7 +268,7 @@ export default function Home() {
       <div id="projects" className={`relative pb-16 ${skipHeroAnimation ? '' : 'animate-fade-in'} z-10`}>
         <div className="px-4 pt-12 mx-auto space-y-6 max-w-7xl sm:px-6 md:space-y-8 md:pt-20 lg:px-8 md:space-y-16 lg:pt-32">
           <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
-            <h2 className="text-4xl font-semibold tracking-tight text-matcha sm:text-5xl md:text-3xl lg:text-4xl font-handwritten">
+            <h2 className="text-4xl font-semibold tracking-tight text-matcha sm:text-5xl md:text-3xl lg:text-4xl font-medium">
               Projects
             </h2>
             <p className="mt-4 text-base md:text-sm text-subink leading-relaxed font-light">
