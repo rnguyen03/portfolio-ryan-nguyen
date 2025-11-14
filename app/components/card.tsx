@@ -267,7 +267,7 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
       />
 
       {/* Content */}
-      <div className="relative z-20">{children}</div>
+      <div className="relative z-20 overflow-hidden">{children}</div>
     </motion.div>
   );
 };

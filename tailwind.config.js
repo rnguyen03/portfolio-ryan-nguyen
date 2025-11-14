@@ -79,6 +79,7 @@ module.exports = {
 			fontFamily: {
 				sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
 				display: ["var(--font-calsans)"],
+				handwritten: ["var(--font-caveat)", "cursive"],
 			},
 			backgroundImage: {
 				"gradient-radial":

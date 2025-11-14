@@ -1,5 +1,5 @@
 import "../global.css";
-import { Inter } from "next/font/google";
+import { Inter, Caveat } from "next/font/google";
 import LocalFont from "next/font/local";
 import Head from "next/head";
 
@@ -79,6 +79,13 @@ const inter = Inter({
   display: "swap",
 });
 
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 const calSans = LocalFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
@@ -88,7 +95,7 @@ const calSans = LocalFont({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+    <html lang="en" className={[inter.variable, calSans.variable, caveat.variable].join(" ")}>
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=G-Q8VE7VEYQR`}></script>
         <script

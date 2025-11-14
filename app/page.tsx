@@ -63,19 +63,27 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Subtle warm gradient overlay over paper texture */}
-      <div className="fixed inset-0 bg-gradient-to-br from-cream-200/20 via-transparent to-cream-300/20 pointer-events-none z-0"></div>
+      {/* 🌤 Ambient Café Sunlight Layer */}
+      <div className="fixed inset-0 bg-sunlight pointer-events-none z-[1]"></div>
       
-      {/* Decorative background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-matcha-300/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cream-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-matcha-200/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+      {/* 🌿 Matcha Dust Corner Gradients */}
+      <div className="fixed inset-0 bg-matcha-corner pointer-events-none z-[1]"></div>
+      
+      {/* 📔 Paper Grain Texture Overlay */}
+      <div className="fixed inset-0 bg-paper-grain z-[1]"></div>
+      
+      {/* ☁️ Floating Dust Particles */}
+      <div className="fixed inset-0 pointer-events-none z-[2] overflow-hidden">
+        <div className="floating-dust"></div>
+        <div className="floating-dust"></div>
+        <div className="floating-dust"></div>
+        <div className="floating-dust"></div>
+        <div className="floating-dust"></div>
       </div>
       
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden relative px-4 z-10">
-        <nav className={`my-8 md:my-16 ${skipHeroAnimation ? '' : 'animate-fade-in'} relative z-10`}>
+        <nav className={`my-8 md:my-16 ${skipHeroAnimation ? '' : 'animate-fade-in'} relative z-10 backdrop-blur-md bg-paper/60 rounded-2xl px-6 py-3 border border-line/40 shadow-cream`}>
           <ul className="flex items-center justify-center gap-6 md:gap-4">
             {navigation.map((item) => (
               <a
@@ -161,9 +169,10 @@ export default function Home() {
         
         {/* Scroll indicator */}
         <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 ${showScrollIndicator ? 'opacity-100 animate-gentle-bounce' : 'opacity-0'} z-10`}>
-          <div className="w-6 h-10 border-2 border-matcha-500 rounded-full flex justify-center backdrop-blur-sm bg-cream-50/30">
-            <div className="w-1 h-3 bg-matcha-500 rounded-full mt-2 animate-pulse-soft"></div>
+          <div className="w-6 h-10 border-2 border-matcha rounded-full flex justify-center backdrop-blur-sm bg-cream-50/30">
+            <div className="w-1 h-3 bg-matcha rounded-full mt-2 animate-pulse-soft"></div>
           </div>
+          <p className="text-xs text-matcha mt-2 font-handwritten">scroll</p>
         </div>
       </div>
 
@@ -172,7 +181,7 @@ export default function Home() {
       <div id="projects" className={`relative pb-16 ${skipHeroAnimation ? '' : 'animate-fade-in'} z-10`}>
         <div className="px-4 pt-12 mx-auto space-y-6 max-w-7xl sm:px-6 md:space-y-8 md:pt-20 lg:px-8 md:space-y-16 lg:pt-32">
           <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
-            <h2 className="text-4xl font-semibold tracking-tight text-matcha sm:text-5xl md:text-3xl lg:text-4xl font-display">
+            <h2 className="text-4xl font-semibold tracking-tight text-matcha sm:text-5xl md:text-3xl lg:text-4xl font-handwritten">
               Projects
             </h2>
             <p className="mt-4 text-base md:text-sm text-subink leading-relaxed font-light">
@@ -183,40 +192,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 gap-6 mx-auto lg:grid-cols-2 lg:gap-8">
             <Card>
-              <Link href={`/projects/${featured.slug}`}>
-                <article className="relative group w-full h-full p-6 md:p-8 flex flex-col">
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="text-sm md:text-xs text-subink font-light">
-                      {featured.date ? (
-                        <time dateTime={new Date(featured.date).toISOString()}>
-                          {Intl.DateTimeFormat(undefined, {
-                            dateStyle: "medium",
-                          }).format(new Date(featured.date))}
-                        </time>
-                      ) : (
-                        <span>SOON</span>
-                      )}
-                    </div>
-                    <span className="flex items-center gap-1 text-xs text-subink">
-                    </span>
-                  </div>
-
-                  <h2
-                    id="featured-post"
-                    className="mt-2 text-2xl font-semibold text-matcha sm:text-3xl md:text-4xl font-display"
-                  >
-                    {featured.title}
-                  </h2>
-                  <p className="mt-2 text-base md:text-sm leading-6 md:leading-8 duration-150 text-subink group-hover:text-matcha-dark font-light">
-                    {featured.description}
-                  </p>
-                  <div className="mt-auto pt-6 md:pt-8">
-                    <p className="text-matcha hover:text-matcha-light text-sm md:text-base font-medium flex items-center gap-2">
-                      Read more <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
-                    </p>
-                  </div>
-                </article>
-              </Link>
+              <Article project={featured} views={views[featured.slug] ?? 0} variant="featured" />
             </Card>
 
             <div className="flex flex-col w-full gap-6 mx-auto border-t border-line/30 lg:mx-0 lg:border-t-0 lg:gap-8">
@@ -270,7 +246,7 @@ export default function Home() {
                 </svg>
               </div>
 
-              <h3 className="text-2xl font-semibold text-matcha mb-2 font-display">My Resume</h3>
+              <h3 className="text-2xl font-semibold text-matcha mb-2 font-handwritten">My Resume</h3>
               <p className="text-subink mb-8 text-sm font-light">
                 View my qualifications, experience, and skills
               </p>
@@ -314,8 +290,13 @@ export default function Home() {
       <footer id="contact" className="relative border-t border-line/50 bg-gradient-to-br from-card/70 to-latte/40 backdrop-blur-sm z-10">
         <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 md:py-12 lg:px-8">
           <div className="flex flex-col items-center justify-between space-y-6 md:flex-row md:space-y-0">
-            <div className="text-sm text-subink text-center md:text-left font-light">
-              © 2024 Ryan Nguyen. All rights reserved.
+            <div className="flex flex-col space-y-2">
+              <div className="text-sm text-subink text-center md:text-left font-light">
+                © 2024 Ryan Nguyen. All rights reserved.
+              </div>
+              {/* <p className="text-xs text-subink/80 italic font-handwritten text-center md:text-left">
+                "brewed with matcha & code ☕"
+              </p> */}
             </div>
             <div className="flex space-x-8">
               <a 
