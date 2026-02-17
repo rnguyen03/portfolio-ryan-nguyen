@@ -6,6 +6,7 @@ import Particles from "./components/particles";
 import { allProjects } from "contentlayer/generated";
 import { Card } from "./components/card";
 import { Article } from "./projects/article";
+import { ResumeModal } from "./components/resume-modal";
 
 type NavItem = {
   name: string;
@@ -247,7 +248,7 @@ export default function Home() {
         )}
         <div className={`my-8 md:my-16 text-center px-4 ${skipHeroAnimation ? '' : 'animate-fade-in'} relative z-10`}>
           <h2 className="text-xl md:text-lg text-matcha-dark mb-4 font-light tracking-wide">
-            Aspiring AI Engineer & Full Stack Developer
+            AI & Full Stack Developer
           </h2>
           <p className="text-base md:text-sm text-subink max-w-2xl mx-auto leading-relaxed font-light">
             Passionate about transforming ideas into impactful applications through innovative AI solutions and robust web development.
@@ -303,75 +304,7 @@ export default function Home() {
       </div>
 
       {/* Resume Modal */}
-      {showResumeModal && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-matcha-900/60 backdrop-blur-md px-4"
-          style={{ animation: 'fadeIn 0.2s ease-in-out' }}
-          onClick={() => setShowResumeModal(false)}
-        >
-          <div 
-            className="relative bg-gradient-to-br from-card to-latte border-2 border-line/60 rounded-3xl p-8 max-w-md w-full shadow-matcha-xl"
-            style={{ animation: 'fadeIn 0.3s ease-in-out' }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={() => setShowResumeModal(false)}
-              className="absolute top-4 right-4 text-matcha hover:text-matcha-dark transition-colors p-2 hover:bg-latte/50 rounded-xl"
-              aria-label="Close"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            <div className="text-center">
-              {/* Icon */}
-              <div className="mx-auto w-16 h-16 bg-latte rounded-2xl flex items-center justify-center mb-6 shadow-matcha-sm">
-                <svg className="w-8 h-8 text-matcha" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-
-              <h3 className="text-2xl font-semibold text-matcha mb-2 font-handwritten">My Resume</h3>
-              <p className="text-subink mb-8 text-sm font-light">
-                View my qualifications, experience, and skills
-              </p>
-
-              {/* Action buttons */}
-              <div className="space-y-3">
-                <a
-                  href="/Ryan%20Nguyen%20Resume%202025.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-matcha hover:bg-matcha-dark text-cream-50 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-matcha-md"
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                    View Resume
-                  </span>
-                </a>
-                
-                <a
-                  href="/Ryan%20Nguyen%20Resume%202025.pdf"
-                  download="Ryan_Nguyen_Resume.pdf"
-                  className="block w-full bg-card hover:bg-latte text-matcha-dark hover:text-matcha font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105"
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                    Download PDF
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ResumeModal open={showResumeModal} onClose={() => setShowResumeModal(false)} />
 
       {/* Footer */}
       <footer id="contact" className="relative border-t border-line/50 bg-gradient-to-br from-card/70 to-latte/40 backdrop-blur-sm z-10">
