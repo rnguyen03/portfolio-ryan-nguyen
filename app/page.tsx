@@ -52,34 +52,57 @@ export default function Home() {
     }
 
     if (item.href === "#contact") {
-      document.querySelector("footer")?.scrollIntoView({ behavior: "smooth" });
-      // Add highlight effect to contact icons
-      setTimeout(() => {
-        const contactIcons = document.querySelectorAll('footer a') as NodeListOf<HTMLElement>;
-        contactIcons.forEach((icon, index) => {
+    const footer = document.querySelector("footer") as HTMLElement | null;
+    if (!footer) return;
+
+    footer.scrollIntoView({ behavior: "smooth" });
+
+    // After the scroll starts/finishes, move focus into the footer (keyboard UX)
+    setTimeout(() => {
+      // Prefer first link/icon in footer
+      const firstIcon = footer.querySelector("a") as HTMLElement | null;
+
+      // Fallback: first focusable element inside footer
+      const firstFocusable = footer.querySelector(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ) as HTMLElement | null;
+
+      const target = firstIcon ?? firstFocusable;
+
+      if (target) {
+        // Ensure it can be focused programmatically
+        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
+
+      // Your highlight effect
+      const contactIcons = footer.querySelectorAll("a") as NodeListOf<HTMLElement>;
+      contactIcons.forEach((icon, index) => {
+        setTimeout(() => {
+          icon.style.transform = "scale(2)";
+          icon.style.color = "#6fa051";
+          icon.style.filter = "drop-shadow(0 0 20px rgba(111, 160, 81, 0.8))";
+          icon.style.transition = "all 0.3s ease";
+
           setTimeout(() => {
-            icon.style.transform = 'scale(1.3)';
-            icon.style.color = '#6fa051';
-            icon.style.filter = 'drop-shadow(0 0 20px rgba(111, 160, 81, 0.8))';
-            icon.style.transition = 'all 0.3s ease';
-            
+            icon.style.transform = "scale(1.5)";
             setTimeout(() => {
-              icon.style.transform = 'scale(1.1)';
-              setTimeout(() => {
-                icon.style.transform = 'scale(1.3)';
-              }, 150);
-            }, 200);
-            
-            setTimeout(() => {
-              icon.style.transform = 'scale(1)';
-              icon.style.color = '';
-              icon.style.filter = '';
-            }, 2500);
-          }, index * 200);
-        });
-      }, 500);
-      return;
-    }
+              icon.style.transform = "scale(2)";
+            }, 150);
+          }, 200);
+
+          setTimeout(() => {
+            icon.style.transform = "scale(1)";
+            icon.style.color = "";
+            icon.style.filter = "";
+          }, 2500);
+        }, index * 200);
+      });
+    }, 500);
+
+    return;
+  }
+
 
     const target = document.querySelector(item.href);
     if (target) {

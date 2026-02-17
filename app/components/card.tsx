@@ -172,7 +172,14 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
       onPointerMove={onPointerMove}
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
-      className="relative overflow-hidden rounded-2xl border-2 border-line/60 bg-clip-padding"
+className="
+  relative overflow-hidden rounded-3xl border-2 border-line/80 bg-paper shadow-md
+  transition-[box-shadow,transform] duration-150 ease-out
+  focus-within:border-matcha focus-within:ring-4 focus-within:ring-matcha/40
+  focus-within:ring-offset-4 focus-within:ring-offset-paper focus-within:shadow-matcha-lg
+"
+
+
       style={{
         backgroundImage: "url(/paper.jpg)",
         backgroundColor: "#EEE7D8", // card-bg fallback
