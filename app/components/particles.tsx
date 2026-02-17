@@ -9,6 +9,7 @@ interface ParticlesProps {
 	staticity?: number;
 	ease?: number;
 	refresh?: boolean;
+	color?: string;
 }
 
 export default function Particles({
@@ -17,11 +18,12 @@ export default function Particles({
 	staticity = 50,
 	ease = 50,
 	refresh = false,
+	color = "160,130,105",
 }: ParticlesProps) {
 	// Adjustable parameters
 	const PARTICLE_SIZE = 1.5;
 	const PARTICLE_MIN_ALPHA = 0.1;
-	const PARTICLE_MAX_ALPHA = 0.7;
+	const PARTICLE_MAX_ALPHA = 0.55;
 	const PARTICLE_SPEED_FACTOR = 0.3;
 	const PARTICLE_MAGNETISM_MIN = 0.1;
 	const PARTICLE_MAGNETISM_MAX = 7.1;
@@ -137,7 +139,7 @@ export default function Particles({
 			context.current.translate(translateX, translateY);
 			context.current.beginPath();
 			context.current.arc(x, y, size, 0, 2 * Math.PI);
-			context.current.fillStyle = `rgba(116, 166, 98, ${alpha})`;
+			context.current.fillStyle = `rgba(${color}, ${alpha})`;
 			context.current.fill();
 			context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
 

@@ -52,56 +52,56 @@ export default function Home() {
     }
 
     if (item.href === "#contact") {
-    const footer = document.querySelector("footer") as HTMLElement | null;
-    if (!footer) return;
+      const footer = document.querySelector("#contact") as HTMLElement | null;
+      if (!footer) return;
 
-    footer.scrollIntoView({ behavior: "smooth" });
+      footer.scrollIntoView({ behavior: "smooth", block: "start" });
 
-    // After the scroll starts/finishes, move focus into the footer (keyboard UX)
-    setTimeout(() => {
-      // Prefer first link/icon in footer
-      const firstIcon = footer.querySelector("a") as HTMLElement | null;
+      const triggerIconHighlight = (icon: HTMLElement) => {
+        icon.style.transition =
+          "transform 180ms ease-out, filter 180ms ease-out, color 180ms ease-out";
+        icon.style.transform = "scale(1.9)";
+        icon.style.color = "#6fa051";
+        icon.style.filter = "drop-shadow(0 0 18px rgba(111, 160, 81, 0.55))";
 
-      // Fallback: first focusable element inside footer
-      const firstFocusable = footer.querySelector(
-        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      ) as HTMLElement | null;
+        window.setTimeout(() => {
+          icon.style.transform = "scale(1.7)";
+        }, 180);
 
-      const target = firstIcon ?? firstFocusable;
+        window.setTimeout(() => {
+          icon.style.transform = "";
+          icon.style.color = "";
+          icon.style.filter = "";
+          icon.style.transition = "";
+        }, 900);
+      };
 
-      if (target) {
-        // Ensure it can be focused programmatically
-        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
-        target.focus({ preventScroll: true });
-      }
+      const waitUntilVisibleThen = (cb: () => void) => {
+        const maxTries = 60; // ~1s at 60fps
+        let tries = 0;
 
-      // Your highlight effect
-      const contactIcons = footer.querySelectorAll("a") as NodeListOf<HTMLElement>;
-      contactIcons.forEach((icon, index) => {
-        setTimeout(() => {
-          icon.style.transform = "scale(2)";
-          icon.style.color = "#6fa051";
-          icon.style.filter = "drop-shadow(0 0 20px rgba(111, 160, 81, 0.8))";
-          icon.style.transition = "all 0.3s ease";
+        const tick = () => {
+          const rect = footer.getBoundingClientRect();
+          const nearViewport = rect.top < window.innerHeight * 0.8;
+          if (nearViewport || tries++ >= maxTries) cb();
+          else requestAnimationFrame(tick);
+        };
 
-          setTimeout(() => {
-            icon.style.transform = "scale(1.5)";
-            setTimeout(() => {
-              icon.style.transform = "scale(2)";
-            }, 150);
-          }, 200);
+        requestAnimationFrame(tick);
+      };
 
-          setTimeout(() => {
-            icon.style.transform = "scale(1)";
-            icon.style.color = "";
-            icon.style.filter = "";
-          }, 2500);
-        }, index * 200);
+      waitUntilVisibleThen(() => {
+        const firstIcon = footer.querySelector("a") as HTMLElement | null;
+        firstIcon?.focus({ preventScroll: true });
+
+        const contactIcons = footer.querySelectorAll("a") as NodeListOf<HTMLElement>;
+        contactIcons.forEach((icon, index) => {
+          window.setTimeout(() => triggerIconHighlight(icon), index * 120);
+        });
       });
-    }, 500);
 
-    return;
-  }
+      return;
+    }
 
 
     const target = document.querySelector(item.href);
@@ -346,7 +346,7 @@ export default function Home() {
                 href="https://github.com/rnguyen03" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40"
+                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-matcha/45 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 aria-label="GitHub"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -357,7 +357,7 @@ export default function Home() {
                 href="https://www.linkedin.com/in/ryannguyenuog/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40"
+                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-matcha/45 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 aria-label="LinkedIn"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -366,7 +366,7 @@ export default function Home() {
               </a>
               <a 
                 href="mailto:ryanvannguyen@gmail.com"
-                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40"
+                className="text-matcha hover:text-matcha-light transition-all duration-300 hover:scale-110 p-2 rounded-xl hover:bg-latte/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-matcha/45 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 aria-label="Email"
               >
                 <svg className="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
