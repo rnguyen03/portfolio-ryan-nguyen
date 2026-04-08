@@ -82,11 +82,15 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 								views,
 							)} */}
 						</span>
-						<Link target="_blank" href="https://www.linkedin.com/in/ryannguyenuog/">
-							<Linkedin className="w-6 h-6 duration-200 text-subink hover:text-matcha" />
+						<Link target="_blank" href="https://www.linkedin.com/in/ryannguyenuog/" className="group relative inline-flex flex-col items-center p-1">
+							<Linkedin className="w-6 h-6 duration-200 text-subink hover:text-matcha relative z-10" />
+							<span className="pointer-events-none absolute bottom-0 left-0 right-0 h-[2px] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 opacity-0 group-hover:opacity-85 group-focus-visible:opacity-85 rounded-sm bg-[rgba(90,75,60,0.8)] [background-image:repeating-linear-gradient(90deg,rgba(0,0,0,0.18)_0px,rgba(0,0,0,0.18)_1px,transparent_1px,transparent_3px)] [filter:blur(0.4px)] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] z-10" />
+							<span className="pointer-events-none absolute bottom-[1px] left-0 right-3 h-[1.5px] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 opacity-0 group-hover:opacity-60 group-focus-visible:opacity-60 rounded-sm bg-[rgba(120,105,90,0.4)] [filter:blur(0.2px)] z-10" />
 						</Link>
-						<Link target="_blank" href="https://github.com/rnguyen03">
-							<Github className="w-6 h-6 duration-200 text-subink hover:text-matcha" />
+						<Link target="_blank" href="https://github.com/rnguyen03" className="group relative inline-flex flex-col items-center p-1">
+							<Github className="w-6 h-6 duration-200 text-subink hover:text-matcha relative z-10" />
+							<span className="pointer-events-none absolute bottom-0 left-0 right-0 h-[2px] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 opacity-0 group-hover:opacity-85 group-focus-visible:opacity-85 rounded-sm bg-[rgba(90,75,60,0.8)] [background-image:repeating-linear-gradient(90deg,rgba(0,0,0,0.18)_0px,rgba(0,0,0,0.18)_1px,transparent_1px,transparent_3px)] [filter:blur(0.4px)] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] z-10" />
+							<span className="pointer-events-none absolute bottom-[1px] left-0 right-3 h-[1.5px] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 opacity-0 group-hover:opacity-60 group-focus-visible:opacity-60 rounded-sm bg-[rgba(120,105,90,0.4)] [filter:blur(0.2px)] z-10" />
 						</Link>
 					</div>
 
@@ -132,9 +136,11 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 										target="_blank"
 										key={link.label}
 										href={link.href}
-										className="hover:text-matcha-dark transition-colors duration-200"
+										className="group relative inline-flex items-center hover:text-matcha-dark transition-colors duration-200"
 									>
-										{link.label} <span aria-hidden="true">&rarr;</span>
+										<span className="pointer-events-none absolute bottom-0 left-0 right-0 h-[2px] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 opacity-0 group-hover:opacity-85 group-focus-visible:opacity-85 rounded-sm bg-[rgba(90,75,60,0.8)] [background-image:repeating-linear-gradient(90deg,rgba(0,0,0,0.18)_0px,rgba(0,0,0,0.18)_1px,transparent_1px,transparent_3px)] [filter:blur(0.4px)] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] z-10" />
+										<span className="pointer-events-none absolute bottom-[1px] left-0 right-4 h-[1.5px] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 opacity-0 group-hover:opacity-60 group-focus-visible:opacity-60 rounded-sm bg-[rgba(120,105,90,0.4)] [filter:blur(0.2px)] z-10" />
+										<span className="relative z-20">{link.label} <span aria-hidden="true">&rarr;</span></span>
 									</Link>
 								))}
 							</div>
