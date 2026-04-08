@@ -58,22 +58,31 @@ export default function Home() {
       footer.scrollIntoView({ behavior: "smooth", block: "start" });
 
       const triggerIconHighlight = (icon: HTMLElement) => {
-        icon.style.transition =
-          "transform 180ms ease-out, filter 180ms ease-out, color 180ms ease-out";
-        icon.style.transform = "scale(1.9)";
+        // Phase 1: pop up
+        icon.style.transition = "transform 180ms ease-out, filter 200ms ease-out, color 200ms ease-out";
+        icon.style.transform = "scale(1.85)";
         icon.style.color = "#6fa051";
         icon.style.filter = "drop-shadow(0 0 18px rgba(111, 160, 81, 0.55))";
 
+        // Phase 2: settle with its own transition so it doesn't snap
         window.setTimeout(() => {
-          icon.style.transform = "scale(1.7)";
+          icon.style.transition = "transform 220ms ease-in-out";
+          icon.style.transform = "scale(1.65)";
         }, 180);
 
+        // Phase 3: return to normal smoothly
         window.setTimeout(() => {
-          icon.style.transform = "";
-          icon.style.color = "";
+          icon.style.transition = "transform 380ms ease-in-out, filter 300ms ease-in, color 300ms ease-in";
+          icon.style.transform = "scale(1)";
           icon.style.filter = "";
+          icon.style.color = "";
+        }, 560);
+
+        // Phase 4: clean up inline styles after return animation completes
+        window.setTimeout(() => {
           icon.style.transition = "";
-        }, 900);
+          icon.style.transform = "";
+        }, 960);
       };
 
       const waitUntilVisibleThen = (cb: () => void) => {
