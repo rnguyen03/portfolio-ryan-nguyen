@@ -33,12 +33,19 @@ export default async function PostPage({ params }: Props) {
   const views = 0;
 
   return (
-    <div className="bg-zinc-50 min-h-screen">
+    <div className="min-h-screen relative bg-paper">
+      {/* Keep the same ambient café layers as the home page */}
+      <div className="fixed inset-0 bg-sunlight pointer-events-none z-[1]"></div>
+      <div className="fixed inset-0 bg-matcha-corner pointer-events-none z-[1]"></div>
+      <div className="fixed inset-0 bg-paper-grain pointer-events-none z-[1]"></div>
+
       <Header project={project} views={views} />
       <ReportView slug={project.slug} />
 
-      <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
-        <Mdx code={project.body.code} />
+      <article className="relative z-10 px-4 pb-20 pt-10 sm:pt-12">
+        <div className="mx-auto w-full max-w-3xl rounded-3xl border border-line/50 bg-paper/85 shadow-matcha-sm backdrop-blur-sm p-6 sm:p-10">
+          <Mdx code={project.body.code} />
+        </div>
       </article>
     </div>
   );

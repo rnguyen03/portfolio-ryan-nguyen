@@ -1,0 +1,108 @@
+---
+title: Safe Guard
+description: A web app that was inspired by the idea of empowering people to make informed choices about their routes, not just based on distance, but on real indicators of safety.
+repository: rnguyen03/saferoute
+date: 2025-11-09
+url: https://saferoute-chi.vercel.app/
+published: true
+---
+
+
+
+## Description
+
+Safe Guard is a safety-focused navigation tool that helps users choose walking routes based on real indicators of safety, rather than simply the fastest path. By combining environmental data, business activity, and contextual intelligence, Safe Guard provides a clearer picture of how safe a route actually feels—especially at night.
+
+---
+
+## Inspiration
+
+Walking alone at night can feel unpredictable, especially for women and other vulnerable groups. Traditional mapping apps optimize for efficiency, not security—ignoring important cues like lighting, open businesses, or whether an area feels populated.
+
+We wanted to rethink navigation from the lens of *personal safety and peace of mind*.  
+**Safe Guard was built to empower people to make informed, confident decisions about their routes.**
+
+---
+
+## What It Does
+
+Safe Guard analyzes several real-world factors to recommend safer walking routes. Each route is scored and summarized with an overall safety rating—**High, Medium, or Low**—along with practical walking advice.
+
+The safety score is calculated using three core data sources:
+
+### **1. Street Lighting (Overpass API)**
+Used to detect lamp posts and assess how well-lit a street is—particularly important for nighttime navigation.
+
+### **2. Nearby Crowds & Activity (Foursquare Places API)**
+Open businesses and high-activity areas often correlate with greater perceived safety and access to help if needed.
+
+### **3. Crime Data (Mock crime dataset)**
+A placeholder dataset for proof-of-concept crime-rate scoring.
+
+After computing scores, Safe Guard generates two recommended routes and provides:
+
+- A route-level safety rating  
+- A segment-by-segment breakdown  
+- A natural-language summary generated using **Gemini API**, which explains *why* a route is safer and gives situational tips (e.g., “Stick to busier streets at night”).
+
+---
+
+## How We Built It
+
+Safe Guard was built using a combination of geospatial tools, APIs, and LLM-driven summarization:
+
+- **Mapbox** for maps, routing, and geospatial visualization  
+- **Overpass API** for street lighting data (OSM nodes)  
+- **Foursquare Places API** for foot-traffic indicators and open businesses  
+- **Crime dataset** (mock data) to simulate risk scoring  
+- **Gemini API** for generating clear, conversational safety summaries  
+- **Custom backend scoring engine** that:
+  - Weighs lighting only at night
+  - Adjusts crowd-based scoring by time of day
+  - Normalizes route segments into a final safety score
+
+Our algorithm dynamically balances these inputs to produce intuitive, human-friendly route insights.
+
+---
+
+## Challenges We Ran Into
+
+Several technical and data challenges shaped our implementation:
+
+- **Uneven or missing lighting data:** Not all cities have complete OSM lighting coverage.  
+- **Crime datasets are highly regional:** Standardizing metrics across cities is difficult.  
+- **Performance vs real-time data:** Overpass and Foursquare calls must be optimized to avoid slowdowns.  
+- **Safety scoring is subjective:** Tuning weights to “feel right” required careful iteration and feedback.
+
+---
+
+## Accomplishments We’re Proud Of
+
+- Building a prototype that prioritizes *safety and empathy*—not just navigation.  
+- Seamlessly integrating multiple real-world data sources.  
+- Using Gemini to translate technical scoring into friendly, actionable advice.  
+- Designing a system centered around vulnerable users, especially women walking alone at night.  
+- Creating a scalable foundation for safety-aware geographic routing.
+
+---
+
+## What We Learned
+
+- How to blend **geospatial data**, **machine intelligence**, and **UX design** into one coherent tool.  
+- How to work with multiple APIs and datasets that vary widely in structure and reliability.  
+- That safety is not purely numerical—it's about context, trust, communication, and experience.  
+- The value of human-centered design when building tools meant to reduce fear or uncertainty.
+
+---
+
+## What’s Next for Safe Guard
+
+We plan to elevate Safe Guard into a full safety companion app with:
+
+- **Live public safety feeds** and emergency alerts  
+- **User-reported safety updates** (crowdsourced hazards or poorly lit areas)  
+- **Real-time crowd density** using social signals  
+- **Mobile app support** with background safety alerts  
+- **Community “safe walk” features** for sharing routes with friends or family
+
+Ultimately, we imagine Safe Guard as a global tool that helps anyone walk with confidence—any time, any place.

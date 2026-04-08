@@ -1,5 +1,5 @@
 import "../global.css";
-import { Inter } from "next/font/google";
+import { Inter, Caveat } from "next/font/google";
 import LocalFont from "next/font/local";
 import Head from "next/head";
 
@@ -75,17 +75,27 @@ export const metadata = {
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const calSans = LocalFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
-  display: "swap", // Add display swap for better loading
+  display: "swap",
+  weight: "600",
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+    <html lang="en" className={[inter.variable, calSans.variable, caveat.variable].join(" ")}>
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=G-Q8VE7VEYQR`}></script>
         <script
@@ -99,7 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={process.env.NODE_ENV === "development" ? "debug-screens bg-black" : "bg-black"}>
+      <body className={process.env.NODE_ENV === "development" ? "debug-screens" : ""}>
         {children}
       </body>
     </html>

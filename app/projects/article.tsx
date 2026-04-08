@@ -1,37 +1,75 @@
 import type { Project } from "@/.contentlayer/generated";
 import Link from "next/link";
-import { Eye, View } from "lucide-react";
+import { Coffee, Coins } from "lucide-react";
 
 type Props = {
 	project: Project;
 	views: number;
+	variant?: "default" | "featured";
 };
 
-export const Article: React.FC<Props> = ({ project, views }) => {
+export const Article: React.FC<Props> = ({ project, views, variant = "default" }) => {
+	const date = project.date ? new Date(project.date) : null;
+	const brewDateLabel = date
+		? Intl.DateTimeFormat(undefined, {
+			month: "long",
+			day: "numeric",
+			year: "numeric",
+		}).format(date)
+		: null;
+	const monthValue = date ? date.getMonth() + 1 : null;
+	const yearValue = date ? date.getFullYear() % 100 : null;
+	const priceLabel =
+		monthValue !== null && yearValue !== null
+			? `$${monthValue}.${yearValue.toString().padStart(2, "0")} CAD`
+			: "Pricing soon";
+
 	return (
-		<Link href={`/projects/${project.slug}`}>
-			<article className="p-4 md:p-8">
-				<div className="flex justify-between gap-2 items-center">
-					<span className="text-xs duration-1000 text-zinc-200 group-hover:text-white group-hover:border-zinc-200 drop-shadow-orange">
-						{project.date ? (
-							<time dateTime={new Date(project.date).toISOString()}>
-								{Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
-									new Date(project.date),
-								)}
+		<Link
+			href={`/projects/${project.slug}`}
+			className="group block rounded-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-matcha/50"
+		>
+			<article
+				className={`flex flex-col overflow-hidden ${
+					variant === "featured" ? "gap-6 p-8 md:p-10" : "gap-4 p-6 md:p-8"
+				}`}
+			>
+				<div className="flex flex-nowrap items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-subink/80 min-w-0">
+					<div className="flex items-center gap-2 flex-shrink-0">
+						<Coffee className="w-3.5 h-3.5 text-matcha flex-shrink-0" aria-hidden />
+						{brewDateLabel && date ? (
+							<time dateTime={date.toISOString()} className="font-medium text-matcha group-hover:text-matcha-light whitespace-nowrap">
+								{brewDateLabel}
 							</time>
 						) : (
-							<span>SOON</span>
+							<span className="font-medium text-matcha whitespace-nowrap">Soon</span>
 						)}
-					</span>
-					<span className="text-zinc-500 text-xs  flex items-center gap-1">
-						{/* <Eye className="w-4 h-4" />{" "}
-						{Intl.NumberFormat("en-US", { notation: "compact" }).format(views)} */}
-					</span>
+					</div>
+					<span className="flex-1 min-w-[24px] h-px bg-subink/40" aria-hidden />
+					<div className="flex items-center gap-2 flex-shrink-0">
+						<Coins className="w-3.5 h-3.5 text-clay flex-shrink-0" aria-hidden />
+						<span className="font-semibold text-matcha-dark tracking-normal transition-colors group-hover:text-matcha-light whitespace-nowrap">
+							{priceLabel}
+						</span>
+					</div>
+					<span className="flex-1 min-w-[24px] h-px bg-subink/40 hidden sm:block" aria-hidden />
 				</div>
-				<h2 className="z-20 text-xl font-medium duration-1000 lg:text-3xl text-zinc-200 group-hover:text-white font-display">
+				<h2
+					className={`${
+						variant === "featured"
+							? "mt-2 text-3xl md:text-4xl"
+							: "mt-4 text-2xl md:text-3xl"
+					} font-semibold text-matcha group-hover:text-matcha-light font-display break-words`}
+				>
 					{project.title}
 				</h2>
-				<p className="z-20 mt-4 text-sm  duration-1000 text-zinc-400 group-hover:text-zinc-200">
+				<p
+					className={`${
+						variant === "featured"
+							? "text-base md:text-lg"
+							: "text-base"
+					} text-subink/90 group-hover:text-matcha-dark leading-relaxed break-words`}
+				>
 					{project.description}
 				</p>
 			</article>
