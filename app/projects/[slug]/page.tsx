@@ -43,7 +43,7 @@ export default async function PostPage({ params }: Props) {
       <ReportView slug={project.slug} />
 
       <article className="relative z-10 px-4 pb-20 pt-10 sm:pt-12">
-        <div className="mx-auto w-full max-w-3xl rounded-3xl border border-line/70 bg-card/75 shadow-matcha-sm backdrop-blur-sm p-6 sm:p-10">
+        <div className="mx-auto w-full max-w-3xl rounded-3xl border border-line/50 bg-paper/85 shadow-matcha-sm backdrop-blur-sm p-6 sm:p-10">
           <Mdx code={project.body.code} />
         </div>
       </article>
